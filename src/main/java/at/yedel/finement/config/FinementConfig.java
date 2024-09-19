@@ -23,7 +23,7 @@ public class FinementConfig extends cc.polyfrost.oneconfig.config.Config {
 
 	@Switch(
 		name = "Client-Side Hurt Animation",
-		description = "Plays the hurt animation client-side when attacking entities. Note that this occurs on all entities, use 'Only Enable on Real Players' to narrow it to just other players.",
+		description = "Plays the hurt animation client-side when attacking entities. Note that this occurs on all entities, use 'Only Enable on Real Players' to reduce it to just other players.",
 		subcategory = "Gameplay"
 	)
 	public boolean clientSideHurtAnimation = false;
