@@ -1,17 +1,15 @@
 [
     {
-        "modid": "examplemod",
-        "name": "ExampleMod",
-        "description": "Template Mod",
+        "modid": "finement",
+        "name": "Finement",
+        "description": "Refines some of the game with fixes and gameplay changes",
         "version": "${version}",
-        "mcversion": "${mcversion}",
-        "url": "",
+        "mcversion": "1.8.9",
+        "url": "https://modrinth.com/project/finement",
         "updateUrl": "",
-        "authorList": [
-            "Debuggings"
-        ],
-        "credits": "",
-        "logoFile": "",
+        "authorList": ["Yedel"],
+        "credits": "Debuggingss for the handsome example mod",
+        "logoFile": "assets/finement/finement.png",
         "screenshots": [],
         "dependencies": []
     }
