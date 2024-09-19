@@ -5,11 +5,39 @@ plugins {
     id("gg.essential.loom")
     id("io.github.juuxel.loom-quiltflower")
     id("dev.architectury.architectury-pack200")
-    id("com.github.johnrengelman.shadow")
+    id("net.kyori.blossom") version "1.3.1"
 }
 
-group = "dev.debuggings"
-version = "1.0.0"
+version = properties["version"]!!
+val devAuthVersion: String by project
+
+val embed: Configuration by configurations.creating
+configurations.implementation.get().extendsFrom(embed)
+
+repositories {
+    maven("https://repo.spongepowered.org/repository/maven-public")
+    maven("https://repo.polyfrost.cc/releases")
+    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+}
+
+dependencies {
+    minecraft("com.mojang:minecraft:1.8.9")
+    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
+    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
+
+    compileOnly("cc.polyfrost:oneconfig-1.8.9-forge:0.2.2-alpha+")
+    embed("cc.polyfrost:oneconfig-wrapper-launchwrapper:1.0.0-beta+")
+
+    compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:$devAuthVersion")
+}
+
+blossom {
+    replaceTokenIn("src/main/java/at/yedel/finement/Finement.java")
+    replaceToken("#version#", version)
+}
 
 loom {
     runConfigs {
@@ -20,35 +48,15 @@ loom {
 
     launchConfigs {
         getByName("client") {
-            arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
-            arg("--mixin", "mixins.examplemod.json")
+            arg("--tweakClass", "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
+            arg("--mixin", "mixins.finement.json")
         }
     }
 
     forge {
         pack200Provider.set(Pack200Adapter())
-        mixinConfig("mixins.examplemod.json")
+        mixinConfig("mixins.finement.json")
     }
-}
-
-val embed: Configuration by configurations.creating
-configurations.implementation.get().extendsFrom(embed)
-
-dependencies {
-    minecraft("com.mojang:minecraft:1.8.9")
-    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
-    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
-
-    compileOnly("gg.essential:essential-1.8.9-forge:4955+g395141645")
-    embed("gg.essential:loader-launchwrapper:1.1.3")
-
-    compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-}
-
-repositories {
-    maven("https://repo.essential.gg/repository/maven-public")
-    maven("https://repo.spongepowered.org/repository/maven-public")
 }
 
 tasks {
@@ -58,17 +66,16 @@ tasks {
         manifest.attributes(
             mapOf(
                 "ModSide" to "CLIENT",
-                "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
-                "MixinConfigs" to "mixins.examplemod.json"
+                "ForceLoadAsMod" to true,
+                "MixinConfigs" to "mixins.finement.json",
+                "TweakClass" to "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker"
             )
         )
     }
 
     processResources {
-        inputs.property("version", project.version)
-        inputs.property("mcversion", "1.8.9")
         filesMatching("mcmod.info") {
-            expand("version" to project.version, "mcversion" to "1.8.9")
+            expand("version" to version)
         }
     }
 

@@ -1,0 +1,10 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "at.yedel.finement.mixins",
+  "mixins": [
+    "MixinYggdrasilMinecraftSessionService"
+  ],
+  "client": [
+    "MixinGuiNewChat"
+  ]
+}
