@@ -11,6 +11,8 @@ Refines some of the game with fixes and gameplay changes
 Plays the hurt animation client-side when attacking entities. 
 Note that this occurs on all entities, use 'Only Enable on Real Players' to reduce it to just other players.
 
+![client side hurt animations](images/clientsidehurtanimations.png)
+
 </details>
 
 ### Other
@@ -23,6 +25,9 @@ Silently decline server resource packs, but tell the server that you successfull
 <details><summary>Unformat Chat Logs</summary>
 
 Properly removes formatting from chat messages before logging them.
+
+![unformatchatlogs1](images/unformatchatlogs1.png)
+![unformatchatlogs2](images/unformatchatlogs2.png)
 
 </details>
 
