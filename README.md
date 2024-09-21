@@ -18,6 +18,7 @@ Note that this occurs on all entities, use 'Only Enable on Real Players' to redu
 ### Other
 
 <details><summary>Silently Decline Server Resource Packs</summary>
+
 Silently decline server resource packs, but tell the server that you successfully downloaded them.
 
 </details>
