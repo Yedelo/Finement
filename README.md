@@ -20,6 +20,9 @@ Note that this occurs on all entities, use 'Only Enable on Real Players' to redu
 <details><summary>Silently Decline Server Resource Packs</summary>
 
 Silently decline server resource packs, but tell the server that you successfully downloaded them.
+You can add a chat message to tell when a server tries to send you a resource pack.
+
+![sdsrp](images/sdsrp.png)
 
 </details>
 
