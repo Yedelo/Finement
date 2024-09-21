@@ -13,6 +13,7 @@ public class FinementConfig extends cc.polyfrost.oneconfig.config.Config {
 		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json");
 		initialize();
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
+		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 	}
 
 	public static FinementConfig instance;
@@ -39,6 +40,12 @@ public class FinementConfig extends cc.polyfrost.oneconfig.config.Config {
 		subcategory = "Other"
 	)
 	public boolean silentlyDeclineServerResourcePacks = false;
+	@Switch(
+		name = "Chat Message Indicator",
+		description = "Sends a chat message when you silently decline a server resource pack.",
+		subcategory = "Other"
+	)
+	public boolean sdsrpChatMessage = true;
 	@Switch(
 		name = "Unformat Chat Logs",
 		description = "Properly removes formatting from chat messages before logging them.",
