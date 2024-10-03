@@ -15,7 +15,34 @@ Note that this occurs on all entities, use 'Only Enable on Real Players' to redu
 
 </details>
 
+<details><summary>0th Person Perspective</summary>
+
+Press to go into an inaccessible and freaky looking perspective mode.
+
+![0th person perspective](images/0thpersonperspective.png)
+
+</details>
+
+<details><summary>Perspective Dependant FOVs</summary>
+
+Allows you to set specific FOVs for different perspectives.
+
+![1st person picture](images/perspectivedependantfovsinfirstperson.png)
+![2nd person picture](images/perspectivedependantfovswithsecondperson.png)
+
+</details>
+
 ### Other
+
+<details><summary>Don't Render Empty Tooltips</summary>
+
+Don't render empty tooltips. 
+Requires advanced tooltips (F3+H) to be off.
+
+![without it on](images/emptytooltiprenderedinbazaar.png)
+![with it on](images/emptytooltipNOTrenderedinbazaar.png)
+
+</details>
 
 <details><summary>Silently Decline Server Resource Packs</summary>
 
