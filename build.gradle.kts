@@ -10,6 +10,7 @@ plugins {
 
 version = properties["version"]!!
 val devAuthVersion: String by project
+val mixinOutEnabled: String by project
 
 val embed: Configuration by configurations.creating
 configurations.implementation.get().extendsFrom(embed)
@@ -48,6 +49,7 @@ loom {
 
     launchConfigs {
         getByName("client") {
+            property("mixin.debug.export", mixinOutEnabled)
             arg("--tweakClass", "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
             arg("--mixin", "mixins.finement.json")
         }
