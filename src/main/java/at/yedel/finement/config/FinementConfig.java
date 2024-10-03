@@ -2,21 +2,22 @@ package at.yedel.finement.config;
 
 
 
+import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
 
 
 
-public class FinementConfig extends cc.polyfrost.oneconfig.config.Config {
-	public FinementConfig() {
+
+public class FinementConfig extends Config {
+	private FinementConfig() {
 		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json");
 		initialize();
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
 		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 	}
-
-	public static FinementConfig instance;
+	private static final FinementConfig instance = new FinementConfig();
 
 	public static FinementConfig getInstance() {
 		return instance;
@@ -34,6 +35,12 @@ public class FinementConfig extends cc.polyfrost.oneconfig.config.Config {
 		subcategory = "Gameplay"
 	)
 	public boolean onlyEnableOnRealPlayers = true;
+	@Switch(
+		name = "Don't Render Empty Tooltips",
+		subcategory = "Other",
+		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
+	)
+	public boolean dontRenderEmptyTooltips = true;
 	@Switch(
 		name = "Silently Decline Server Resource Packs",
 		description = "Silently decline server resource packs, but tell the server that you successfully downloaded them.",

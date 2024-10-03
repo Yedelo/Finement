@@ -5,6 +5,7 @@
     "MixinYggdrasilMinecraftSessionService"
   ],
   "client": [
-    "MixinGuiNewChat"
+    "MixinGuiNewChat",
+    "MixinGuiScreen"
   ]
 }
