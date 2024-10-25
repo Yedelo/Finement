@@ -5,6 +5,7 @@
     "MixinYggdrasilMinecraftSessionService"
   ],
   "client": [
+    "AccessorFontRenderer",
     "MixinEntityRenderer",
     "MixinGuiNewChat",
     "MixinGuiScreen"

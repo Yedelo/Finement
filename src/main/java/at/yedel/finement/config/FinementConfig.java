@@ -2,10 +2,13 @@ package at.yedel.finement.config;
 
 
 
+import at.yedel.finement.mixins.AccessorFontRenderer;
 import cc.polyfrost.oneconfig.config.Config;
+import cc.polyfrost.oneconfig.config.annotations.Color;
 import cc.polyfrost.oneconfig.config.annotations.KeyBind;
 import cc.polyfrost.oneconfig.config.annotations.Slider;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
+import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
@@ -16,9 +19,19 @@ import static at.yedel.finement.Finement.minecraft;
 
 
 public class FinementConfig extends Config {
+	private static final FinementConfig instance = new FinementConfig();
+
+	public static FinementConfig getInstance() {
+		return instance;
+	}
+
+	public final int[] originalColorCodes = new int[32];
+	public final int[] customColorCodes = new int[32];
+
 	private FinementConfig() {
 		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json");
 		initialize();
+		setupColorCodes();
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
 		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 		addDependency("firstPersonFOV", "perspectiveDependantFOVs");
@@ -29,11 +42,6 @@ public class FinementConfig extends Config {
 			// it is a bit misleading
 			minecraft.gameSettings.thirdPersonView = -1;
 		});
-	}
-	private static final FinementConfig instance = new FinementConfig();
-
-	public static FinementConfig getInstance() {
-		return instance;
 	}
 
 	@Switch(
@@ -114,7 +122,7 @@ public class FinementConfig extends Config {
 
 	@Switch(
 		name = "Don't Render Empty Tooltips",
-		subcategory = "Other",
+		subcategory = "UI",
 		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
 	)
 	public boolean dontRenderEmptyTooltips = true;
@@ -146,4 +154,320 @@ public class FinementConfig extends Config {
 		subcategory = "Other"
 	)
 	public boolean hideMissingSignatureErrors = true;
+
+	private void setupColorCodes() {
+		// Keep the original color codes so that when custom color codes are toggled, these values can be copied back to the original array
+		System.arraycopy(((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, originalColorCodes, 0, 32);
+		loadCustomColorCodes();
+
+		for (String string: new String[] {
+			"mainColor$0",
+			"mainColor$1",
+			"mainColor$2",
+			"mainColor$3",
+			"mainColor$4",
+			"mainColor$5",
+			"mainColor$6",
+			"mainColor$7",
+			"mainColor$8",
+			"mainColor$9",
+			"mainColor$a",
+			"mainColor$b",
+			"mainColor$c",
+			"mainColor$d",
+			"mainColor$e",
+			"mainColor$f",
+			"shadowColor$0",
+			"shadowColor$1",
+			"shadowColor$2",
+			"shadowColor$3",
+			"shadowColor$4",
+			"shadowColor$5",
+			"shadowColor$6",
+			"shadowColor$7",
+			"shadowColor$8",
+			"shadowColor$9",
+			"shadowColor$a",
+			"shadowColor$b",
+			"shadowColor$c",
+			"shadowColor$d",
+			"shadowColor$e",
+			"shadowColor$f"
+		}) {
+			addListener(string, this::loadCustomColorCodes);
+			addDependency(string, "colorCodeToggle");
+		}
+		addListener("colorCodeToggle", () -> {
+			System.arraycopy(colorCodeToggle ? customColorCodes : originalColorCodes, 0, ((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, 32);
+		});
+	}
+
+	private void loadCustomColorCodes() {
+		customColorCodes[0] = mainColor$0.getRGB();
+		customColorCodes[1] = mainColor$1.getRGB();
+		customColorCodes[2] = mainColor$2.getRGB();
+		customColorCodes[3] = mainColor$3.getRGB();
+		customColorCodes[4] = mainColor$4.getRGB();
+		customColorCodes[5] = mainColor$5.getRGB();
+		customColorCodes[6] = mainColor$6.getRGB();
+		customColorCodes[7] = mainColor$7.getRGB();
+		customColorCodes[8] = mainColor$8.getRGB();
+		customColorCodes[9] = mainColor$9.getRGB();
+		customColorCodes[10] = mainColor$a.getRGB();
+		customColorCodes[11] = mainColor$b.getRGB();
+		customColorCodes[12] = mainColor$c.getRGB();
+		customColorCodes[13] = mainColor$d.getRGB();
+		customColorCodes[14] = mainColor$e.getRGB();
+		customColorCodes[15] = mainColor$f.getRGB();
+		customColorCodes[16] = shadowColor$0.getRGB();
+		customColorCodes[17] = shadowColor$1.getRGB();
+		customColorCodes[18] = shadowColor$2.getRGB();
+		customColorCodes[19] = shadowColor$3.getRGB();
+		customColorCodes[20] = shadowColor$4.getRGB();
+		customColorCodes[21] = shadowColor$5.getRGB();
+		customColorCodes[22] = shadowColor$6.getRGB();
+		customColorCodes[23] = shadowColor$7.getRGB();
+		customColorCodes[24] = shadowColor$8.getRGB();
+		customColorCodes[25] = shadowColor$9.getRGB();
+		customColorCodes[26] = shadowColor$a.getRGB();
+		customColorCodes[27] = shadowColor$b.getRGB();
+		customColorCodes[28] = shadowColor$c.getRGB();
+		customColorCodes[29] = shadowColor$d.getRGB();
+		customColorCodes[30] = shadowColor$e.getRGB();
+		customColorCodes[31] = shadowColor$f.getRGB();
+		
+		System.arraycopy(customColorCodes, 0, ((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, 32);
+	}
+
+	@Switch(
+		name = "Color Code Toggle",
+		description = "Toggle to set all color codes back to normal.",
+		category = "Custom Color Codes",
+		size = 2
+	)
+	public boolean colorCodeToggle = false;
+
+	@Color(
+		name = "§0 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$0 = new OneColor(0);
+
+	@Color(
+		name = "§0 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$0 = new OneColor(0);
+
+	@Color(
+		name = "§1 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$1 = new OneColor(170);
+
+	@Color(
+		name = "§1 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$1 = new OneColor(42);
+
+	@Color(
+		name = "§2 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$2 = new OneColor(43520);
+
+	@Color(
+		name = "§2 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$2 = new OneColor(10752);
+
+	@Color(
+		name = "§3 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$3 = new OneColor(43690);
+
+	@Color(
+		name = "§3 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$3 = new OneColor(10794);
+
+	@Color(
+		name = "§4 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$4 = new OneColor(11141120);
+
+	@Color(
+		name = "§4 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$4 = new OneColor(2752512);
+
+	@Color(
+		name = "§5 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$5 = new OneColor(11141290);
+
+	@Color(
+		name = "§5 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$5 = new OneColor(2752554);
+
+	@Color(
+		name = "§6 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$6 = new OneColor(16755200);
+
+	@Color(
+		name = "§6 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$6 = new OneColor(2763264);
+
+	@Color(
+		name = "§7 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$7 = new OneColor(11184810);
+
+	@Color(
+		name = "§7 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$7 = new OneColor(2763306);
+
+	@Color(
+		name = "§8 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$8 = new OneColor(5592405);
+
+	@Color(
+		name = "§8 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$8 = new OneColor(1381653);
+
+	@Color(
+		name = "§9 Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$9 = new OneColor(5592575);
+
+	@Color(
+		name = "§9 Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$9 = new OneColor(1381695);
+
+	@Color(
+		name = "§a Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$a = new OneColor(5635925);
+
+	@Color(
+		name = "§a Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$a = new OneColor(1392405);
+
+	@Color(
+		name = "§b Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$b = new OneColor(5636095);
+
+	@Color(
+		name = "§b Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$b = new OneColor(1392447);
+
+	@Color(
+		name = "§c Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$c = new OneColor(16733525);
+
+	@Color(
+		name = "§c Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$c = new OneColor(4134165);
+
+	@Color(
+		name = "§d Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$d = new OneColor(16733695);
+
+	@Color(
+		name = "§d Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$d = new OneColor(4134207);
+
+	@Color(
+		name = "§e Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$e = new OneColor(16777045);
+
+	@Color(
+		name = "§e Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$e = new OneColor(4144917);
+
+	@Color(
+		name = "§f Color (Main)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor mainColor$f = new OneColor(16777215);
+
+	@Color(
+		name = "§f Color (Shadow)",
+		allowAlpha = false,
+		category = "Custom Color Codes"
+	)
+	public OneColor shadowColor$f = new OneColor(4144959);
 }

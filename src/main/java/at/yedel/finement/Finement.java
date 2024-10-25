@@ -4,7 +4,6 @@ package at.yedel.finement;
 
 import java.util.Map;
 
-import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.features.ClientSideHurtAnimation;
 import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
@@ -33,7 +32,6 @@ public class Finement {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		FinementConfig.getInstance();
 		CommandManager.register(new FinementCommand());
 		MinecraftForge.EVENT_BUS.register(ClientSideHurtAnimation.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
