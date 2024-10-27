@@ -32,6 +32,14 @@ Allows you to set specific FOVs for different perspectives.
 
 </details>
 
+<details><summary>Custom Color Codes</summary>
+
+Allows you to set custom colors for different colors and their shadows.
+
+![color codes picture](images/colorcodespicture.png)
+
+</details>
+
 ### Other
 
 <details><summary>Don't Render Empty Tooltips</summary>
@@ -67,3 +75,4 @@ Properly removes formatting from chat messages before logging them.
 Hides "Signature is missing from textures payload" errors from being logged.
 
 </details>
+
