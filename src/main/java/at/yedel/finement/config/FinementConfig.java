@@ -2,16 +2,17 @@ package at.yedel.finement.config;
 
 
 
-
 import at.yedel.finement.mixins.AccessorFontRenderer;
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.Button;
 import cc.polyfrost.oneconfig.config.annotations.Color;
+import cc.polyfrost.oneconfig.config.annotations.Info;
 import cc.polyfrost.oneconfig.config.annotations.KeyBind;
 import cc.polyfrost.oneconfig.config.annotations.Slider;
 import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
+import cc.polyfrost.oneconfig.config.data.InfoType;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
 import org.lwjgl.input.Keyboard;
@@ -244,7 +245,15 @@ public class FinementConfig extends Config {
 	private static OneColor randomColor() {
 		return new OneColor((int) (Math.random() * 16777215));
 	}
-	
+
+	@Info(
+		text = "Use /finement colors to view the different color codes.",
+		type = InfoType.INFO,
+		size = 2,
+		category = "Custom Color Codes"
+	)
+	private Object info = null;
+
 	@Switch(
 		name = "Color Code Toggle",
 		category = "Custom Color Codes",
@@ -257,7 +266,7 @@ public class FinementConfig extends Config {
 		text = "Randomize",
 		category = "Custom Color Codes"
 	)
-	public Runnable randomizeColorCodes = () -> {
+	private Runnable randomizeColorCodes = () -> {
 		mainColor$0 = randomColor();
 		mainColor$1 = randomColor();
 		mainColor$2 = randomColor();
@@ -298,7 +307,7 @@ public class FinementConfig extends Config {
 		text = "Reset",
 		category = "Custom Color Codes"
 	)
-	public Runnable resetColorCodes = () -> {
+	private Runnable resetColorCodes = () -> {
 		mainColor$0 = new OneColor(0);
 		mainColor$1 = new OneColor(170);
 		mainColor$2 = new OneColor(43520);
@@ -339,222 +348,222 @@ public class FinementConfig extends Config {
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$0 = new OneColor(0);
+	private OneColor mainColor$0 = new OneColor(0);
 
 	@Color(
 		name = "§0 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$0 = new OneColor(0);
+	private OneColor shadowColor$0 = new OneColor(0);
 
 	@Color(
 		name = "§1 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$1 = new OneColor(170);
+	private OneColor mainColor$1 = new OneColor(170);
 
 	@Color(
 		name = "§1 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$1 = new OneColor(42);
+	private OneColor shadowColor$1 = new OneColor(42);
 
 	@Color(
 		name = "§2 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$2 = new OneColor(43520);
+	private OneColor mainColor$2 = new OneColor(43520);
 
 	@Color(
 		name = "§2 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$2 = new OneColor(10752);
+	private OneColor shadowColor$2 = new OneColor(10752);
 
 	@Color(
 		name = "§3 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$3 = new OneColor(43690);
+	private OneColor mainColor$3 = new OneColor(43690);
 
 	@Color(
 		name = "§3 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$3 = new OneColor(10794);
+	private OneColor shadowColor$3 = new OneColor(10794);
 
 	@Color(
 		name = "§4 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$4 = new OneColor(11141120);
+	private OneColor mainColor$4 = new OneColor(11141120);
 
 	@Color(
 		name = "§4 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$4 = new OneColor(2752512);
+	private OneColor shadowColor$4 = new OneColor(2752512);
 
 	@Color(
 		name = "§5 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$5 = new OneColor(11141290);
+	private OneColor mainColor$5 = new OneColor(11141290);
 
 	@Color(
 		name = "§5 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$5 = new OneColor(2752554);
+	private OneColor shadowColor$5 = new OneColor(2752554);
 
 	@Color(
 		name = "§6 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$6 = new OneColor(16755200);
+	private OneColor mainColor$6 = new OneColor(16755200);
 
 	@Color(
 		name = "§6 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$6 = new OneColor(2763264);
+	private OneColor shadowColor$6 = new OneColor(2763264);
 
 	@Color(
 		name = "§7 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$7 = new OneColor(11184810);
+	private OneColor mainColor$7 = new OneColor(11184810);
 
 	@Color(
 		name = "§7 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$7 = new OneColor(2763306);
+	private OneColor shadowColor$7 = new OneColor(2763306);
 
 	@Color(
 		name = "§8 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$8 = new OneColor(5592405);
+	private OneColor mainColor$8 = new OneColor(5592405);
 
 	@Color(
 		name = "§8 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$8 = new OneColor(1381653);
+	private OneColor shadowColor$8 = new OneColor(1381653);
 
 	@Color(
 		name = "§9 Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$9 = new OneColor(5592575);
+	private OneColor mainColor$9 = new OneColor(5592575);
 
 	@Color(
 		name = "§9 Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$9 = new OneColor(1381695);
+	private OneColor shadowColor$9 = new OneColor(1381695);
 
 	@Color(
 		name = "§a Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$a = new OneColor(5635925);
+	private OneColor mainColor$a = new OneColor(5635925);
 
 	@Color(
 		name = "§a Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$a = new OneColor(1392405);
+	private OneColor shadowColor$a = new OneColor(1392405);
 
 	@Color(
 		name = "§b Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$b = new OneColor(5636095);
+	private OneColor mainColor$b = new OneColor(5636095);
 
 	@Color(
 		name = "§b Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$b = new OneColor(1392447);
+	private OneColor shadowColor$b = new OneColor(1392447);
 
 	@Color(
 		name = "§c Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$c = new OneColor(16733525);
+	private OneColor mainColor$c = new OneColor(16733525);
 
 	@Color(
 		name = "§c Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$c = new OneColor(4134165);
+	private OneColor shadowColor$c = new OneColor(4134165);
 
 	@Color(
 		name = "§d Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$d = new OneColor(16733695);
+	private OneColor mainColor$d = new OneColor(16733695);
 
 	@Color(
 		name = "§d Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$d = new OneColor(4134207);
+	private OneColor shadowColor$d = new OneColor(4134207);
 
 	@Color(
 		name = "§e Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$e = new OneColor(16777045);
+	private OneColor mainColor$e = new OneColor(16777045);
 
 	@Color(
 		name = "§e Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$e = new OneColor(4144917);
+	private OneColor shadowColor$e = new OneColor(4144917);
 
 	@Color(
 		name = "§f Color (Main)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor mainColor$f = new OneColor(16777215);
+	private OneColor mainColor$f = new OneColor(16777215);
 
 	@Color(
 		name = "§f Color (Shadow)",
 		allowAlpha = false,
 		category = "Custom Color Codes"
 	)
-	public OneColor shadowColor$f = new OneColor(4144959);
+	private OneColor shadowColor$f = new OneColor(4144959);
 }
