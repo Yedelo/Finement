@@ -2,8 +2,10 @@ package at.yedel.finement.config;
 
 
 
+
 import at.yedel.finement.mixins.AccessorFontRenderer;
 import cc.polyfrost.oneconfig.config.Config;
+import cc.polyfrost.oneconfig.config.annotations.Button;
 import cc.polyfrost.oneconfig.config.annotations.Color;
 import cc.polyfrost.oneconfig.config.annotations.KeyBind;
 import cc.polyfrost.oneconfig.config.annotations.Slider;
@@ -158,7 +160,7 @@ public class FinementConfig extends Config {
 	private void setupColorCodes() {
 		// Keep the original color codes so that when custom color codes are toggled, these values can be copied back to the original array
 		System.arraycopy(((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, originalColorCodes, 0, 32);
-		loadCustomColorCodes();
+		if (colorCodeToggle) loadCustomColorCodes();
 
 		for (String string: new String[] {
 			"mainColor$0",
@@ -239,13 +241,98 @@ public class FinementConfig extends Config {
 		System.arraycopy(customColorCodes, 0, ((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, 32);
 	}
 
+	private static OneColor randomColor() {
+		return new OneColor((int) (Math.random() * 16777215));
+	}
+	
 	@Switch(
 		name = "Color Code Toggle",
-		description = "Toggle to set all color codes back to normal.",
 		category = "Custom Color Codes",
 		size = 2
 	)
 	public boolean colorCodeToggle = false;
+
+	@Button(
+		name = "Randomize Color Codes",
+		text = "Randomize",
+		category = "Custom Color Codes"
+	)
+	public Runnable randomizeColorCodes = () -> {
+		mainColor$0 = randomColor();
+		mainColor$1 = randomColor();
+		mainColor$2 = randomColor();
+		mainColor$3 = randomColor();
+		mainColor$4 = randomColor();
+		mainColor$5 = randomColor();
+		mainColor$6 = randomColor();
+		mainColor$7 = randomColor();
+		mainColor$8 = randomColor();
+		mainColor$9 = randomColor();
+		mainColor$a = randomColor();
+		mainColor$b = randomColor();
+		mainColor$c = randomColor();
+		mainColor$d = randomColor();
+		mainColor$e = randomColor();
+		mainColor$f = randomColor();
+		shadowColor$0 = randomColor();
+		shadowColor$1 = randomColor();
+		shadowColor$2 = randomColor();
+		shadowColor$3 = randomColor();
+		shadowColor$4 = randomColor();
+		shadowColor$5 = randomColor();
+		shadowColor$6 = randomColor();
+		shadowColor$7 = randomColor();
+		shadowColor$8 = randomColor();
+		shadowColor$9 = randomColor();
+		shadowColor$a = randomColor();
+		shadowColor$b = randomColor();
+		shadowColor$c = randomColor();
+		shadowColor$d = randomColor();
+		shadowColor$e = randomColor();
+		shadowColor$f = randomColor();
+		if (colorCodeToggle) loadCustomColorCodes();
+	};
+
+	@Button(
+		name = "Reset Color Codes",
+		text = "Reset",
+		category = "Custom Color Codes"
+	)
+	public Runnable resetColorCodes = () -> {
+		mainColor$0 = new OneColor(0);
+		mainColor$1 = new OneColor(170);
+		mainColor$2 = new OneColor(43520);
+		mainColor$3 = new OneColor(43690);
+		mainColor$4 = new OneColor(11141120);
+		mainColor$5 = new OneColor(11141290);
+		mainColor$6 = new OneColor(16755200);
+		mainColor$7 = new OneColor(11184810);
+		mainColor$8 = new OneColor(5592405);
+		mainColor$9 = new OneColor(5592575);
+		mainColor$a = new OneColor(5635925);
+		mainColor$b = new OneColor(5636095);
+		mainColor$c = new OneColor(16733525);
+		mainColor$d = new OneColor(16733695);
+		mainColor$e = new OneColor(16777045);
+		mainColor$f = new OneColor(16777215);
+		shadowColor$0 = new OneColor(0);
+		shadowColor$1 = new OneColor(42);
+		shadowColor$2 = new OneColor(10752);
+		shadowColor$3 = new OneColor(10794);
+		shadowColor$4 = new OneColor(2752512);
+		shadowColor$5 = new OneColor(2752554);
+		shadowColor$6 = new OneColor(2763264);
+		shadowColor$7 = new OneColor(2763306);
+		shadowColor$8 = new OneColor(1381653);
+		shadowColor$9 = new OneColor(1381695);
+		shadowColor$a = new OneColor(1392405);
+		shadowColor$b = new OneColor(1392447);
+		shadowColor$c = new OneColor(4134165);
+		shadowColor$d = new OneColor(4134207);
+		shadowColor$e = new OneColor(4144917);
+		shadowColor$f = new OneColor(4144959);
+		if (colorCodeToggle) loadCustomColorCodes();
+	};
 
 	@Color(
 		name = "§0 Color (Main)",
