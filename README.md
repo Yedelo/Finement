@@ -40,7 +40,21 @@ Allows you to set custom colors for different colors and their shadows.
 
 </details>
 
-### Other
+### Inventory
+
+<details><summary>Smooth Slot Hovering</summary>
+
+Draws square highlights at your mouse instead of snapping to slots.
+
+![smooth slot hovering](images/smoothslothovering.png)
+
+</details>
+
+<details><summary>Snap Item Rendering</summary>
+
+Snaps your held item in inventories to the currently hovered slot.
+
+</details>
 
 <details><summary>Don't Render Empty Tooltips</summary>
 
@@ -51,6 +65,8 @@ Requires advanced tooltips (F3+H) to be off.
 ![with it on](images/emptytooltipNOTrenderedinbazaar.png)
 
 </details>
+
+### Other
 
 <details><summary>Silently Decline Server Resource Packs</summary>
 
