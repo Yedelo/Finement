@@ -124,11 +124,27 @@ public class FinementConfig extends Config {
 	}
 
 	@Switch(
+		name = "Smooth Slot Hovering",
+		subcategory = "Inventory",
+		description = "Draws square highlights at your mouse instead of snapping to slots."
+	)
+	public boolean smoothSlotHovering = false;
+
+	@Switch(
+		name = "Snap Item Rendering",
+		subcategory = "Inventory",
+		description = "Snaps your held item in inventories to the currently hovered slot."
+	)
+	public boolean snapItemRendering = false;
+
+	@Switch(
 		name = "Don't Render Empty Tooltips",
-		subcategory = "UI",
+		subcategory = "Inventory",
 		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
 	)
 	public boolean dontRenderEmptyTooltips = true;
+
+
 
 	@Switch(
 		name = "Silently Decline Server Resource Packs",
