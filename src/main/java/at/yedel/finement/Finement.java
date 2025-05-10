@@ -39,7 +39,7 @@ public class Finement {
 	}
 
 	@NetworkCheckHandler
-	public boolean permitPlayers(Map modMap, Side side) {
+	public boolean permitPlayers(Map<String, String> modMap, Side side) {
 		return true;
 	}
 
