@@ -29,7 +29,6 @@ import net.minecraftforge.fml.relauncher.Side;
 )
 public class Finement {
 	public static final String version = "#version#";
-	public static final Minecraft minecraft = Minecraft.getMinecraft();
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {

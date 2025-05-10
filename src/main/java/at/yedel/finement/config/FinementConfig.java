@@ -15,9 +15,8 @@ import cc.polyfrost.oneconfig.config.core.OneKeyBind;
 import cc.polyfrost.oneconfig.config.data.InfoType;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
+import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
-
-import static at.yedel.finement.Finement.minecraft;
 
 
 
@@ -43,7 +42,7 @@ public class FinementConfig extends Config {
 		addDependency("zerothPersonFOV", "perspectiveDependantFOVs");
 		registerKeyBind(zerothPersonPerspectiveKeybind, () -> {
 			// it is a bit misleading
-			minecraft.gameSettings.thirdPersonView = -1;
+			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
 	}
 
@@ -81,7 +80,7 @@ public class FinementConfig extends Config {
 		min = 30F,
 		max = 110F
 	)
-	public float firstPersonFOV = minecraft.gameSettings.fovSetting;
+	public float firstPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
 		name = "Second Person FOV",
@@ -89,7 +88,7 @@ public class FinementConfig extends Config {
 		min = 30F,
 		max = 110F
 	)
-	public float secondPersonFOV = minecraft.gameSettings.fovSetting;
+	public float secondPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
 		name = "Third Person FOV",
@@ -97,7 +96,7 @@ public class FinementConfig extends Config {
 		min = 30F,
 		max = 110F
 	)
-	public float thirdPersonFOV = minecraft.gameSettings.fovSetting;
+	public float thirdPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
 		name = "Zeroth Person FOV",
@@ -105,11 +104,11 @@ public class FinementConfig extends Config {
 		min = 30F,
 		max = 110F
 	)
-	public float zerothPersonFOV = minecraft.gameSettings.fovSetting;
+	public float zerothPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	public float getFOVModifier(float originalFov) {
 		if (perspectiveDependantFOVs) {
-			switch (minecraft.gameSettings.thirdPersonView) {
+			switch (Minecraft.getMinecraft().gameSettings.thirdPersonView) {
 				case -1:
 					return zerothPersonFOV;
 				case 0:
@@ -176,7 +175,7 @@ public class FinementConfig extends Config {
 
 	private void setupColorCodes() {
 		// Keep the original color codes so that when custom color codes are toggled, these values can be copied back to the original array
-		System.arraycopy(((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, originalColorCodes, 0, 32);
+		System.arraycopy(((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, originalColorCodes, 0, 32);
 		if (colorCodeToggle) loadCustomColorCodes();
 
 		for (String string: new String[] {
@@ -217,7 +216,7 @@ public class FinementConfig extends Config {
 			addDependency(string, "colorCodeToggle");
 		}
 		addListener("colorCodeToggle", () -> {
-			System.arraycopy(colorCodeToggle ? customColorCodes : originalColorCodes, 0, ((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, 32);
+			System.arraycopy(colorCodeToggle ? customColorCodes : originalColorCodes, 0, ((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, 32);
 		});
 	}
 
@@ -255,7 +254,7 @@ public class FinementConfig extends Config {
 		customColorCodes[30] = shadowColor$e.getRGB();
 		customColorCodes[31] = shadowColor$f.getRGB();
 		
-		System.arraycopy(customColorCodes, 0, ((AccessorFontRenderer) minecraft.fontRendererObj).finement$getColorCodeArray(), 0, 32);
+		System.arraycopy(customColorCodes, 0, ((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, 32);
 	}
 
 	private static OneColor randomColor() {
