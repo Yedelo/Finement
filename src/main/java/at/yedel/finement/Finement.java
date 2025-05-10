@@ -10,7 +10,6 @@ import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
 import cc.polyfrost.oneconfig.events.EventManager;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
