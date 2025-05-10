@@ -35,15 +35,11 @@ public class SilentlyDeclineServerResourcePacks {
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C19PacketResourcePackStatus(hash, Action.SUCCESSFULLY_LOADED));
 			event.isCancelled = true;
 			if (FinementConfig.getInstance().sdsrpChatMessage) {
-				UChat.chat(colorUp("&!&l[Finement] &!Silently declined server resource pack."));
+				char randomColorCode = allColorCodes.charAt(random.nextInt(allColorCodes.length()));
+				UChat.chat("&!&l[Finement] &!Silently declined server resource pack.".replace("&!", "&" + randomColorCode));
 			}
 		}
 	}
 
 	private static final String allColorCodes = "0421356789abcdef";
-
-	private String colorUp(String string) {
-		char randomColorCode = allColorCodes.charAt(random.nextInt(allColorCodes.length()));
-		return string.replace("&!", "&" + randomColorCode);
-	}
 }
