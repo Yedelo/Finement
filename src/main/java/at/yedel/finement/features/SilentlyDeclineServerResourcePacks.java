@@ -17,14 +17,16 @@ import net.minecraft.network.play.server.S48PacketResourcePackSend;
 
 // class names are getting out of hand
 public class SilentlyDeclineServerResourcePacks {
-	private SilentlyDeclineServerResourcePacks() {}
 	private static final SilentlyDeclineServerResourcePacks INSTANCE = new SilentlyDeclineServerResourcePacks();
-
-	private static final Random RANDOM = new Random();
 
 	public static SilentlyDeclineServerResourcePacks getInstance() {
 		return INSTANCE;
 	}
+
+	private static final Random RANDOM = new Random();
+	private static final String ALL_COLOR_CODES = "0421356789abcdef";
+
+	private SilentlyDeclineServerResourcePacks() {}
 
 	@Subscribe
 	public void handleServerResourcePackPacket(ReceivePacketEvent event) {
@@ -40,6 +42,4 @@ public class SilentlyDeclineServerResourcePacks {
 			}
 		}
 	}
-
-	private static final String ALL_COLOR_CODES = "0421356789abcdef";
 }
