@@ -4,8 +4,8 @@ package at.yedel.finement.mixins;
 
 import java.util.List;
 
-import at.yedel.finement.Finement;
 import at.yedel.finement.config.FinementConfig;
+import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +29,7 @@ public abstract class MixinGuiScreen {
 	)
 	private void finement$dontRenderEmptyTooltip(ItemStack stack, int x, int y, CallbackInfo ci, List<String> list) {
 		if (FinementConfig.getInstance().dontRenderEmptyTooltips) {
-			if (list.stream().map(Finement::removeFormatting).allMatch(string -> string.trim().isEmpty())) {
+			if (list.stream().map(UTextComponent.Companion::stripFormatting).allMatch(string -> string.trim().isEmpty())) {
 				ci.cancel();
 			}
 		}

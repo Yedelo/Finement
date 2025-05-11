@@ -41,8 +41,4 @@ public class Finement {
 	public boolean permitPlayers(Map<String, String> modMap, Side side) {
 		return true;
 	}
-
-	public static String removeFormatting(String string) {
-		return string.replaceAll("§[0123456789abcdefklnor]", "");
-	}
 }
