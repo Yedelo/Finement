@@ -13,10 +13,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientSideHurtAnimation {
 	private ClientSideHurtAnimation() {}
-	private static final ClientSideHurtAnimation instance = new ClientSideHurtAnimation();
+	private static final ClientSideHurtAnimation INSTANCE = new ClientSideHurtAnimation();
 
 	public static ClientSideHurtAnimation getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	@SubscribeEvent

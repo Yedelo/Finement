@@ -21,10 +21,10 @@ import org.lwjgl.input.Keyboard;
 
 
 public class FinementConfig extends Config {
-	private static final FinementConfig instance = new FinementConfig();
+	private static final FinementConfig INSTANCE = new FinementConfig();
 
 	public static FinementConfig getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	public final int[] originalColorCodes = new int[32];
@@ -142,8 +142,6 @@ public class FinementConfig extends Config {
 		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
 	)
 	public boolean dontRenderEmptyTooltips = true;
-
-
 
 	@Switch(
 		name = "Silently Decline Server Resource Packs",

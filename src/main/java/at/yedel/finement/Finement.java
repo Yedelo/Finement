@@ -21,13 +21,13 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod(
 	modid = "finement",
 	name = "Finement",
-	version = Finement.version,
+	version = Finement.VERSION,
 	clientSideOnly = true,
 	acceptedMinecraftVersions = "1.8.9",
 	guiFactory = "at.yedel.finement.config.forge.FinementGuiFactory"
 )
 public class Finement {
-	public static final String version = "#version#";
+	public static final String VERSION = "#VERSION#";
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {

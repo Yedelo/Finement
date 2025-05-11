@@ -18,12 +18,12 @@ import net.minecraft.network.play.server.S48PacketResourcePackSend;
 // class names are getting out of hand
 public class SilentlyDeclineServerResourcePacks {
 	private SilentlyDeclineServerResourcePacks() {}
-	private static final SilentlyDeclineServerResourcePacks instance = new SilentlyDeclineServerResourcePacks();
+	private static final SilentlyDeclineServerResourcePacks INSTANCE = new SilentlyDeclineServerResourcePacks();
 
-	private static final Random random = new Random();
+	private static final Random RANDOM = new Random();
 
 	public static SilentlyDeclineServerResourcePacks getInstance() {
-		return instance;
+		return INSTANCE;
 	}
 
 	@Subscribe
@@ -35,11 +35,11 @@ public class SilentlyDeclineServerResourcePacks {
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C19PacketResourcePackStatus(hash, Action.SUCCESSFULLY_LOADED));
 			event.isCancelled = true;
 			if (FinementConfig.getInstance().sdsrpChatMessage) {
-				char randomColorCode = allColorCodes.charAt(random.nextInt(allColorCodes.length()));
+				char randomColorCode = ALL_COLOR_CODES.charAt(RANDOM.nextInt(ALL_COLOR_CODES.length()));
 				UChat.chat("&!&l[Finement] &!Silently declined server resource pack.".replace("&!", "&" + randomColorCode));
 			}
 		}
 	}
 
-	private static final String allColorCodes = "0421356789abcdef";
+	private static final String ALL_COLOR_CODES = "0421356789abcdef";
 }
