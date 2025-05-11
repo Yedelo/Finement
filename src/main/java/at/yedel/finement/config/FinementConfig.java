@@ -31,7 +31,7 @@ public class FinementConfig extends Config {
 	public final int[] customColorCodes = new int[32];
 
 	private FinementConfig() {
-		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json");
+		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json", true, true);
 		initialize();
 		setupColorCodes();
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
