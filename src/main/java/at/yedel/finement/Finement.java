@@ -23,8 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 	name = "Finement",
 	version = Finement.VERSION,
 	clientSideOnly = true,
-	acceptedMinecraftVersions = "1.8.9",
-	guiFactory = "at.yedel.finement.config.forge.FinementGuiFactory"
+	acceptedMinecraftVersions = "1.8.9"
 )
 public class Finement {
 	public static final String VERSION = "#VERSION#";
