@@ -13,6 +13,14 @@ import cc.polyfrost.oneconfig.utils.commands.annotations.SubCommand;
 
 @Command(value = "finement", description = "Opens the Finement config.", chatColor = ChatColor.DARK_AQUA)
 public class FinementCommand {
+	private static final FinementCommand INSTANCE = new FinementCommand();
+
+	public static FinementCommand getInstance() {
+		return INSTANCE;
+	}
+
+	private FinementCommand() {}
+
 	@Main
 	private void main() {
 		FinementConfig.getInstance().openGui();
