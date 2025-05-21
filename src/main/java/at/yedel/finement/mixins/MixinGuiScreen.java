@@ -28,7 +28,7 @@ public abstract class MixinGuiScreen {
 		cancellable = true
 	)
 	private void finement$dontRenderEmptyTooltip(ItemStack stack, int x, int y, CallbackInfo ci, List<String> list) {
-		if (FinementConfig.getInstance().dontRenderEmptyTooltips) {
+		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().dontRenderEmptyTooltips) {
 			if (list.stream().map(UTextComponent.Companion::stripFormatting).allMatch(string -> string.trim().isEmpty())) {
 				ci.cancel();
 			}

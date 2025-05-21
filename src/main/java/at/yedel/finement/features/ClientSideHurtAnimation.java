@@ -22,7 +22,7 @@ public class ClientSideHurtAnimation {
 
 	@SubscribeEvent
 	public void doClientSideHurtAnimation(AttackEntityEvent event) {
-		if (!FinementConfig.getInstance().clientSideHurtAnimation) return;
+		if (!FinementConfig.getInstance().enabled || !FinementConfig.getInstance().clientSideHurtAnimation) return;
 		if (!(event.target instanceof EntityLivingBase)) return;
 		EntityLivingBase targetEntity = (EntityLivingBase) event.target;
 		if (FinementConfig.getInstance().onlyEnableOnRealPlayers && !isRealPlayer(targetEntity)) return;

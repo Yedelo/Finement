@@ -30,7 +30,7 @@ public class SilentlyDeclineServerResourcePacks {
 
 	@Subscribe
 	public void handleServerResourcePackPacket(ReceivePacketEvent event) {
-		if (!FinementConfig.getInstance().silentlyDeclineServerResourcePacks) return;
+		if (!FinementConfig.getInstance().enabled || !FinementConfig.getInstance().silentlyDeclineServerResourcePacks) return;
 		if (event.packet instanceof S48PacketResourcePackSend) {
 			String hash = ((S48PacketResourcePackSend) event.packet).getHash();
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C19PacketResourcePackStatus(hash, Action.ACCEPTED));

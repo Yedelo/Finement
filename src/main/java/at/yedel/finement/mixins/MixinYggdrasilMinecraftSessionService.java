@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MixinYggdrasilMinecraftSessionService {
 	@Redirect(method = "getTextures", at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;error(Ljava/lang/String;)V", ordinal = 0), remap = false)
 	private void finement$hideMissingSignatureErrors(Logger instance, String s) {
-		if (FinementConfig.getInstance().hideMissingSignatureErrors) {
+		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().hideMissingSignatureErrors) {
 			return;
 		}
 		else {

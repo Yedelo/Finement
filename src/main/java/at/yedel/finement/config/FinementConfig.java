@@ -107,7 +107,7 @@ public class FinementConfig extends Config {
 	public float zerothPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	public float getFOVModifier(float originalFov) {
-		if (perspectiveDependantFOVs) {
+		if (enabled && perspectiveDependantFOVs) {
 			switch (Minecraft.getMinecraft().gameSettings.thirdPersonView) {
 				case -1:
 					return zerothPersonFOV;

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class MixinGuiNewChat {
 	@ModifyArg(method = "printChatMessageWithOptionalDeletion", at = @At(value = "INVOKE", target = "Lorg/apache/logging/log4j/Logger;info(Ljava/lang/String;)V", remap = false))
 	private String finement$unformatChatLogs(String message) {
-		if (FinementConfig.getInstance().unformatChatLogs) return UTextComponent.Companion.stripFormatting(message);
+		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().unformatChatLogs) return UTextComponent.Companion.stripFormatting(message);
 		else return message;
 	}
 }
