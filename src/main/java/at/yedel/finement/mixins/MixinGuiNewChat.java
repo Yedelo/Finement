@@ -8,6 +8,9 @@ import net.minecraft.client.gui.GuiNewChat;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.util.List;
 
 
 
@@ -17,5 +20,16 @@ public abstract class MixinGuiNewChat {
 	private String finement$unformatChatLogs(String message) {
 		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().unformatChatLogs) return UTextComponent.Companion.stripFormatting(message);
 		else return message;
+	}
+
+	@Redirect(
+		method = "clearChatMessages",
+		at = @At(value = "INVOKE", target = "Ljava/util/List;clear()V", ordinal = 2)
+	)
+	private void finement$keepChatHistory(List<String> sentMessages) {
+		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().keepChatHistoryOnChatClear) {
+			return;
+		}
+		sentMessages.clear();
 	}
 }

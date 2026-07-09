@@ -6,9 +6,12 @@
   ],
   "client": [
     "AccessorFontRenderer",
+    "MixinEntityPlayerSP",
     "MixinEntityRenderer",
     "MixinGuiContainer",
     "MixinGuiNewChat",
-    "MixinGuiScreen"
+    "MixinGuiScreen",
+    "MixinIntegratedServer",
+    "MixinItemBucket"
   ]
 }

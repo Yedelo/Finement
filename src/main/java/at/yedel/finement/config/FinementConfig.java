@@ -4,12 +4,7 @@ package at.yedel.finement.config;
 
 import at.yedel.finement.mixins.AccessorFontRenderer;
 import cc.polyfrost.oneconfig.config.Config;
-import cc.polyfrost.oneconfig.config.annotations.Button;
-import cc.polyfrost.oneconfig.config.annotations.Color;
-import cc.polyfrost.oneconfig.config.annotations.Info;
-import cc.polyfrost.oneconfig.config.annotations.KeyBind;
-import cc.polyfrost.oneconfig.config.annotations.Slider;
-import cc.polyfrost.oneconfig.config.annotations.Switch;
+import cc.polyfrost.oneconfig.config.annotations.*;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
 import cc.polyfrost.oneconfig.config.data.InfoType;
@@ -34,6 +29,7 @@ public class FinementConfig extends Config {
 		super(new Mod("Finement", ModType.UTIL_QOL, "assets/finement/finement.png"), "finement.json", true, true);
 		initialize();
 		setupColorCodes();
+
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
 		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 		addDependency("firstPersonFOV", "perspectiveDependantFOVs");
@@ -44,6 +40,8 @@ public class FinementConfig extends Config {
 			// it is a bit misleading
 			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
+
+		addDependency("damageTiltStrength", "damageTilt");
 	}
 
 	@Switch(
@@ -121,6 +119,86 @@ public class FinementConfig extends Config {
 		}
 		return originalFov;
 	}
+
+	/* Modern Features */
+
+	@Header(
+		text = "Features backported from modern versions of the game.",
+		category = "Modern Features",
+		size = 2
+	)
+	private transient int header$3 = 1;
+
+	// General
+
+	@Switch(
+		name = "Book Background (1.14+)",
+		description = "Draws the default dark background in book GUIs.",
+		category = "Modern Features",
+		subcategory = "General"
+	)
+	public boolean bookBackground = true;
+
+	@Switch(
+		name = "Keep Chat History on Chat Clear (1.15.2+)",
+		description = "When clearing your chat (F3 + D), keep your message history (from pressing up arrow key).",
+		category = "Modern Features",
+		subcategory = "General"
+	)
+	public boolean keepChatHistoryOnChatClear = true;
+
+	@Switch(
+		name = "Change Window Title (1.15.2+)",
+		description = "Changes the window title on world and server join.",
+		category = "Modern Features",
+		subcategory = "General"
+	)
+	public boolean changeWindowTitle = false;
+
+	@Switch(
+		name = "Damage Tilt (1.19.4+)",
+		description = "Allows you to customize how much your screen hurts when being damaged.",
+		category = "Modern Features",
+		subcategory = "General"
+	)
+	public boolean damageTilt = false;
+
+	@Slider(
+		name = "Damage Tilt Strength",
+		description = "The amount of camera shake caused by being hurt.",
+		category = "Modern Features",
+		subcategory = "General",
+		min = 0,
+		max = 100,
+		step = 1
+	)
+	// And move it into this field
+	public int damageTiltStrength = 1;
+
+	@Info(
+		text = "Note: This only swings your hand client-side.",
+		type = InfoType.INFO,
+		category = "Modern Features",
+		subcategory = "Hand Swings",
+		size = 2
+	)
+	private transient int info$6 = 1;
+
+	@Switch(
+		name = "Item Uses (1.15+)",
+		description = "Swings your hand when using certain items, such as snowballs, eggs and armor.",
+		category = "Modern Features",
+		subcategory = "Hand Swings"
+	)
+	public boolean itemUseSwings = false;
+
+	@Switch(
+		name = "Item Drops (1.15+)",
+		description = "Swings your hand when dropping an item.",
+		category = "Modern Features",
+		subcategory = "Hand Swings"
+	)
+	public boolean itemDropSwings = false;
 
 	@Switch(
 		name = "Smooth Slot Hovering",

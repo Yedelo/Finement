@@ -7,6 +7,7 @@ import at.yedel.finement.config.FinementConfig;
 import net.minecraft.client.renderer.EntityRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 
@@ -20,6 +21,14 @@ public abstract class MixinEntityRenderer {
 	)
 	private float finement$perspectiveDependantFOVs(float originalFOV) {
 		return FinementConfig.getInstance().getFOVModifier(originalFOV);
+	}
+
+	@ModifyArg(method = "hurtCameraEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/GlStateManager;rotate(FFFF)V", ordinal = 2), index = 0)
+	private float finement$changeHurtcamIntensity(float original) {
+		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().damageTilt) return original * FinementConfig.getInstance().damageTiltStrength / 100;
+		else {
+			return original;
+		}
 	}
 }
 

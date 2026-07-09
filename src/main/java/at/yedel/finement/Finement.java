@@ -8,6 +8,9 @@ import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.features.ClientSideHurtAnimation;
 import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
+import at.yedel.finement.features.modern.BookBackground;
+import at.yedel.finement.features.modern.ChangeWindowTitle;
+import at.yedel.finement.features.modern.ItemSwings;
 import cc.polyfrost.oneconfig.events.EventManager;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -34,11 +37,26 @@ public class Finement {
 		CommandManager.register(FinementCommand.getInstance());
 		MinecraftForge.EVENT_BUS.register(ClientSideHurtAnimation.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
+		registerEventListeners(
+			ClientSideHurtAnimation.getInstance(),
+			SilentlyDeclineServerResourcePacks.getInstance(),
+
+			BookBackground.getInstance(),
+			ChangeWindowTitle.getInstance(),
+			ItemSwings.getInstance()
+		);
 	}
 
 	// i guess bro
 	@NetworkCheckHandler
 	public boolean permitPlayers(Map<String, String> modMap, Side side) {
 		return true;
+	}
+
+	private void registerEventListeners(Object... eventListeners) {
+		for (Object eventListener: eventListeners) {
+			MinecraftForge.EVENT_BUS.register(eventListener);
+			EventManager.INSTANCE.register(eventListener);
+		}
 	}
 }
