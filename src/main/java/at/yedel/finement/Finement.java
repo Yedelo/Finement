@@ -19,14 +19,14 @@ import net.minecraftforge.fml.relauncher.Side;
 
 
 @Mod(
-	modid = "finement",
-	name = "Finement",
+	modid = "@MOD_ID@",
+	name = "@MOD_NAME@",
 	version = Finement.VERSION,
 	clientSideOnly = true,
 	acceptedMinecraftVersions = "1.8.9"
 )
 public class Finement {
-	public static final String VERSION = "#VERSION#";
+	public static final String VERSION = "@MOD_VERSION@";
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
@@ -36,6 +36,7 @@ public class Finement {
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
 	}
 
+	// i guess bro
 	@NetworkCheckHandler
 	public boolean permitPlayers(Map<String, String> modMap, Side side) {
 		return true;

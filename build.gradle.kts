@@ -1,87 +1,62 @@
-import dev.architectury.pack200.java.Pack200Adapter
+import dev.deftu.gradle.utils.GameSide
 
-plugins {
-    kotlin("jvm")
-    id("gg.essential.loom")
-    id("io.github.juuxel.loom-quiltflower")
-    id("dev.architectury.architectury-pack200")
-    id("net.kyori.blossom") version "1.3.1"
-}
-
-version = properties["version"]!!
+val oneconfigVersion: String by project
+val oneconfigWrapperVersion: String by project
 val devAuthVersion: String by project
-val mixinOutEnabled: String by project
-
-val embed: Configuration by configurations.creating
-configurations.implementation.get().extendsFrom(embed)
 
 repositories {
-    maven("https://repo.spongepowered.org/repository/maven-public")
+    gradlePluginPortal()
+    mavenCentral()
     maven("https://repo.polyfrost.cc/releases")
-    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven("https://repo.spongepowered.org/repository/maven-public")
+}
+
+plugins {
+    java
+    val dgt = "2.73.0"
+    id("dev.deftu.gradle.tools") version dgt
+    for (tool in listOf(
+        "java",
+        "minecraft.loom",
+        "bloom",
+        "ducks",
+        "resources",
+        "shadow"
+    )) id("dev.deftu.gradle.tools.$tool") version dgt
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:1.8.9")
-    mappings("de.oceanlabs.mcp:mcp_stable:22-1.8.9")
-    forge("net.minecraftforge:forge:1.8.9-11.15.1.2318-1.8.9")
-
-    compileOnly("cc.polyfrost:oneconfig-1.8.9-forge:0.2.2-alpha+")
-    embed("cc.polyfrost:oneconfig-wrapper-launchwrapper:1.0.0-beta+")
+    compileOnly("cc.polyfrost:oneconfig-${mcData.version}-${mcData.loader}:$oneconfigVersion")
+    listOf(
+        "implementation",
+        "shade"
+    ).forEach { it("cc.polyfrost:oneconfig-wrapper-launchwrapper:$oneconfigWrapperVersion") }
 
     compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-
-    modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:$devAuthVersion")
 }
 
-blossom {
-    replaceTokenIn("src/main/java/at/yedel/finement/Finement.java")
-    replaceToken("#version#", version)
-}
+toolkitLoomHelper {
+    disableRunConfigs(GameSide.SERVER)
 
-loom {
-    runConfigs {
-        named("client") {
-            ideConfigGenerated(true)
-        }
+    // Remove this in the run config if you're using other OneConfig mods, since those mods will not load with the tweaker argument.
+    useTweaker("cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
+
+    if (mcData.isLegacyForge) {
+        useForgeMixin("finement")
+        useMixinRefMap("finement")
     }
 
-    launchConfigs {
-        getByName("client") {
-            property("mixin.debug.export", mixinOutEnabled)
-            arg("--tweakClass", "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
-            arg("--mixin", "mixins.finement.json")
-        }
-    }
-
-    forge {
-        pack200Provider.set(Pack200Adapter())
-        mixinConfig("mixins.finement.json")
+    useDevAuth(devAuthVersion)
+    useArgument("--version", "Finement", GameSide.BOTH)
+    val resourcePackDir: String? = System.getenv("minecraft.resourcePackDir")
+    if (!resourcePackDir.isNullOrBlank()) {
+        println("Using resource pack directory $resourcePackDir from environment variable minecraft.resourcePackDir")
+        useArgument("--resourcePackDir", resourcePackDir, GameSide.BOTH)
     }
 }
 
 tasks {
     jar {
-        from(embed.files.map { zipTree(it) })
-
-        manifest.attributes(
-            mapOf(
-                "ModSide" to "CLIENT",
-                "ForceLoadAsMod" to true,
-                "MixinConfigs" to "mixins.finement.json",
-                "TweakClass" to "cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker"
-            )
-        )
-    }
-
-    processResources {
-        filesMatching("mcmod.info") {
-            expand("version" to version)
-        }
-    }
-
-    withType<JavaCompile> {
-        options.release.set(8)
+        manifest.attributes(mapOf("ModSide" to "CLIENT"))
     }
 }

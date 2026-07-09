@@ -1,10 +1,10 @@
 [
     {
-        "modid": "finement",
-        "name": "Finement",
-        "description": "Refines some of the game with fixes and gameplay changes",
-        "version": "${version}",
-        "mcversion": "1.8.9",
+        "modid": "${mod_id}",
+        "name": "${mod_name}",
+        "description": "${mod_description}",
+        "version": "${mod_version}",
+        "mcversion": "${mc_version}",
         "url": "https://modrinth.com/project/finement",
         "updateUrl": "",
         "authorList": ["Yedel"],
