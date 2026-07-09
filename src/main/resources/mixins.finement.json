@@ -12,6 +12,9 @@
     "MixinGuiNewChat",
     "MixinGuiScreen",
     "MixinIntegratedServer",
-    "MixinItemBucket"
+    "MixinItemBucket",
+    "MixinItemRenderer",
+    "MixinLayerHeldItem",
+    "MixinRenderPlayer"
   ]
 }

@@ -40,6 +40,7 @@ public class FinementConfig extends Config {
 			// it is a bit misleading
 			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
+		addDependency("rotateSwordInThirdPerson", "clientSideAutoBlock");
 
 		addDependency("damageTiltStrength", "damageTilt");
 		addDependency("specifiedServer", "favoriteServerButton");
@@ -120,6 +121,20 @@ public class FinementConfig extends Config {
 		}
 		return originalFov;
 	}
+
+	@Switch(
+		name = "Client-Side Auto-Block",
+		description = "Always shows the blocking animation client-side.",
+		subcategory = "Gameplay"
+	)
+	public boolean clientSideAutoBlock = false;
+
+	@Switch(
+		name = "Rotate Sword in Third Person",
+		description = "Applies sword rotations for third-person auto-blocking. Potentially fixes rotation issues with OverflowAnimations.",
+		subcategory = "Gameplay"
+	)
+	public boolean rotateSwordInThirdPerson = true;
 
 	/* Modern Features */
 
