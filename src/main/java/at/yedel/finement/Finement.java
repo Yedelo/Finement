@@ -6,7 +6,6 @@ import java.util.Map;
 
 import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.features.ClientSideHurtAnimation;
-import at.yedel.finement.features.FavoriteServerButton;
 import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
 import at.yedel.finement.features.modern.BookBackground;
@@ -44,9 +43,7 @@ public class Finement {
 
 			BookBackground.getInstance(),
 			ChangeWindowTitle.getInstance(),
-			ItemSwings.getInstance(),
-
-			FavoriteServerButton.getInstance()
+			ItemSwings.getInstance()
 		);
 	}
 
