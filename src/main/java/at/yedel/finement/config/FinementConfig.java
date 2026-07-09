@@ -31,51 +31,71 @@ public class FinementConfig extends Config {
 		setupColorCodes();
 
 		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
-		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
-		addDependency("firstPersonFOV", "perspectiveDependantFOVs");
-		addDependency("secondPersonFOV", "perspectiveDependantFOVs");
-		addDependency("thirdPersonFOV", "perspectiveDependantFOVs");
-		addDependency("zerothPersonFOV", "perspectiveDependantFOVs");
+		addDependency("rotateSwordInThirdPerson", "clientSideAutoBlock");
 		registerKeyBind(zerothPersonPerspectiveKeybind, () -> {
 			// it is a bit misleading
 			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
-		addDependency("rotateSwordInThirdPerson", "clientSideAutoBlock");
-
+		addDependency("firstPersonFOV", "perspectiveDependantFOVs");
+		addDependency("secondPersonFOV", "perspectiveDependantFOVs");
+		addDependency("thirdPersonFOV", "perspectiveDependantFOVs");
+		addDependency("zerothPersonFOV", "perspectiveDependantFOVs");
+		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 		addDependency("damageTiltStrength", "damageTilt");
 	}
 
 	@Switch(
 		name = "Client-Side Hurt Animation",
 		description = "Plays the hurt animation client-side when attacking entities. Note that this occurs on all entities, use 'Only Enable on Real Players' to reduce it to just other players.",
-		subcategory = "Gameplay"
+		category = "Gameplay",
+		subcategory = "Combat"
 	)
 	public boolean clientSideHurtAnimation = false;
 
 	@Switch(
 		name = "Only Enable on Real Players",
 		description = "Only play the client-side hurt animation on real players.",
-		subcategory = "Gameplay"
+		category = "Gameplay",
+		subcategory = "Combat"
 	)
 	public boolean onlyEnableOnRealPlayers = true;
+
+	@Switch(
+		name = "Client-Side Auto-Block",
+		description = "Always shows the blocking animation client-side.",
+		category = "Gameplay",
+		subcategory = "Combat"
+	)
+	public boolean clientSideAutoBlock = false;
+
+	@Switch(
+		name = "Rotate Sword in Third Person",
+		description = "Applies sword rotations for third-person auto-blocking. Potentially fixes rotation issues with OverflowAnimations.",
+		category = "Gameplay",
+		subcategory = "Combat"
+	)
+	public boolean rotateSwordInThirdPerson = true;
 
 	@KeyBind(
 		name = "0th Person Perspective",
 		description = "Press to go into an inaccessible and freaky looking perspective mode.",
-		subcategory = "Gameplay"
+		category = "Gameplay",
+		subcategory = "Perspective"
 	)
 	public OneKeyBind zerothPersonPerspectiveKeybind = new OneKeyBind(Keyboard.KEY_O);
 
 	@Switch(
 		name = "Perspective Dependant FOVs",
 		description = "Allows you to set specific FOVs for different perspectives.",
-		subcategory = "Gameplay"
+		category = "Gameplay",
+		subcategory = "Perspective"
 	)
 	public boolean perspectiveDependantFOVs = false;
 
 	@Slider(
 		name = "First Person FOV",
-		subcategory = "Gameplay",
+		category = "Gameplay",
+		subcategory = "Perspective",
 		min = 30F,
 		max = 110F
 	)
@@ -83,7 +103,8 @@ public class FinementConfig extends Config {
 
 	@Slider(
 		name = "Second Person FOV",
-		subcategory = "Gameplay",
+		category = "Gameplay",
+		subcategory = "Perspective",
 		min = 30F,
 		max = 110F
 	)
@@ -91,7 +112,8 @@ public class FinementConfig extends Config {
 
 	@Slider(
 		name = "Third Person FOV",
-		subcategory = "Gameplay",
+		category = "Gameplay",
+		subcategory = "Perspective",
 		min = 30F,
 		max = 110F
 	)
@@ -99,7 +121,8 @@ public class FinementConfig extends Config {
 
 	@Slider(
 		name = "Zeroth Person FOV",
-		subcategory = "Gameplay",
+		category = "Gameplay",
+		subcategory = "Perspective",
 		min = 30F,
 		max = 110F
 	)
@@ -122,20 +145,60 @@ public class FinementConfig extends Config {
 	}
 
 	@Switch(
-		name = "Client-Side Auto-Block",
-		description = "Always shows the blocking animation client-side.",
-		subcategory = "Gameplay"
+		name = "Smooth Slot Hovering",
+		description = "Draws square highlights at your mouse instead of snapping to slots.",
+		category = "Interface",
+		subcategory = "Inventory"
 	)
-	public boolean clientSideAutoBlock = false;
+	public boolean smoothSlotHovering = false;
 
 	@Switch(
-		name = "Rotate Sword in Third Person",
-		description = "Applies sword rotations for third-person auto-blocking. Potentially fixes rotation issues with OverflowAnimations.",
-		subcategory = "Gameplay"
+		name = "Snap Item Rendering",
+		description = "Snaps your held item in inventories to the currently hovered slot.",
+		category = "Interface",
+		subcategory = "Inventory"
 	)
-	public boolean rotateSwordInThirdPerson = true;
+	public boolean snapItemRendering = false;
 
-	/* Modern Features */
+	@Switch(
+		name = "Don't Render Empty Tooltips",
+		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off.",
+		category = "Interface",
+		subcategory = "Inventory"
+	)
+	public boolean dontRenderEmptyTooltips = true;
+
+	@Switch(
+		name = "Silently Decline Server Resource Packs",
+		description = "Silently decline server resource packs, but tell the server that you successfully downloaded them.",
+		category = "Interface",
+		subcategory = "Other"
+	)
+	public boolean silentlyDeclineServerResourcePacks = false;
+
+	@Switch(
+		name = "Chat Message Indicator",
+		description = "Sends a chat message when you silently decline a server resource pack.",
+		category = "Interface",
+		subcategory = "Other"
+	)
+	public boolean sdsrpChatMessage = true;
+
+	@Switch(
+		name = "Unformat Chat Logs",
+		description = "Properly removes formatting from chat messages before logging them.",
+		category = "Interface",
+		subcategory = "Other"
+	)
+	public boolean unformatChatLogs = true;
+
+	@Switch(
+		name = "Hide Missing Signature Errors",
+		description = "Hides \"Signature is missing from textures payload\" errors from being logged.",
+		category = "Interface",
+		subcategory = "Other"
+	)
+	public boolean hideMissingSignatureErrors = true;
 
 	@Header(
 		text = "Features backported from modern versions of the game.",
@@ -143,8 +206,6 @@ public class FinementConfig extends Config {
 		size = 2
 	)
 	private transient int header$3 = 1;
-
-	// General
 
 	@Switch(
 		name = "Book Background (1.14+)",
@@ -187,7 +248,6 @@ public class FinementConfig extends Config {
 		max = 100,
 		step = 1
 	)
-	// And move it into this field
 	public int damageTiltStrength = 1;
 
 	@Info(
@@ -215,54 +275,7 @@ public class FinementConfig extends Config {
 	)
 	public boolean itemDropSwings = false;
 
-	@Switch(
-		name = "Smooth Slot Hovering",
-		subcategory = "Inventory",
-		description = "Draws square highlights at your mouse instead of snapping to slots."
-	)
-	public boolean smoothSlotHovering = false;
-
-	@Switch(
-		name = "Snap Item Rendering",
-		subcategory = "Inventory",
-		description = "Snaps your held item in inventories to the currently hovered slot."
-	)
-	public boolean snapItemRendering = false;
-
-	@Switch(
-		name = "Don't Render Empty Tooltips",
-		subcategory = "Inventory",
-		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
-	)
-	public boolean dontRenderEmptyTooltips = true;
-
-	@Switch(
-		name = "Silently Decline Server Resource Packs",
-		description = "Silently decline server resource packs, but tell the server that you successfully downloaded them.",
-		subcategory = "Other"
-	)
-	public boolean silentlyDeclineServerResourcePacks = false;
-
-	@Switch(
-		name = "Chat Message Indicator",
-		description = "Sends a chat message when you silently decline a server resource pack.",
-		subcategory = "Other"
-	)
-	public boolean sdsrpChatMessage = true;
-
-	@Switch(
-		name = "Unformat Chat Logs",
-		description = "Properly removes formatting from chat messages before logging them.",
-		subcategory = "Other"
-	)
-	public boolean unformatChatLogs = true;
-
-	@Switch(
-		name = "Hide Missing Signature Errors",
-		description = "Hides \"Signature is missing from textures payload\" errors from being logged.",
-		subcategory = "Other"
-	)
-	public boolean hideMissingSignatureErrors = true;
+	// he tryna ignore it
 
 	private void setupColorCodes() {
 		// Keep the original color codes so that when custom color codes are toggled, these values can be copied back to the original array
