@@ -42,6 +42,7 @@ public class FinementConfig extends Config {
 		});
 
 		addDependency("damageTiltStrength", "damageTilt");
+		addDependency("specifiedServer", "favoriteServerButton");
 	}
 
 	@Switch(
@@ -220,6 +221,20 @@ public class FinementConfig extends Config {
 		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off."
 	)
 	public boolean dontRenderEmptyTooltips = true;
+
+	@Switch(
+		name = "Favorite Server Button",
+		description = "Adds a button to the main menu to join a customizable server address.",
+		subcategory = "Other"
+	)
+	public boolean favoriteServerButton = false;
+
+	@Text(
+		name = "Specified Server",
+		description = "Server joined with button",
+		subcategory = "Other"
+	)
+	public String specifiedServer = "mc.hypixel.net";
 
 	@Switch(
 		name = "Silently Decline Server Resource Packs",
