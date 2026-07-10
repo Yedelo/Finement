@@ -366,7 +366,7 @@ public class FinementConfig extends Config {
 	}
 
 	@Info(
-		text = "Use /finement colors to view the different color codes.",
+		text = "Use /finement formatting to view the different color codes.",
 		type = InfoType.INFO,
 		size = 2,
 		category = "Custom Color Codes"

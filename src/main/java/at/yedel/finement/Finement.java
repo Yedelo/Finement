@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.Side;
 )
 public class Finement {
 	public static final String VERSION = "@MOD_VERSION@";
+	public static final String FINEMARK = "§6§l< §3§lFinement §6§l>§r";
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
