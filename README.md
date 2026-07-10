@@ -1,94 +1,47 @@
 # Finement
 
-Refines some of the game with fixes and gameplay changes
+![logo](src/main/resources/assets/finement/finement.png)
+
+[Modrinth](https://modrinth.com/project/finement)
+
+![discord yedel](https://img.shields.io/badge/discord-yedel-blue)
+
+![github release version](https://img.shields.io/github/v/release/Yedelo/finement?include_prereleases&label=github)
+
+![modrinth latest version](https://img.shields.io/modrinth/v/ZZtH3PLP?label=modrinth)
+
+Refines the game with QOL gameplay extensions
 
 ## Features
 
-### Gameplay
+<details><summary>Gameplay</summary>
 
-<details><summary>Client-Side Hurt Animation</summary>
-
-Plays the hurt animation client-side when attacking entities. 
-Note that this occurs on all entities, use 'Only Enable on Real Players' to reduce it to just other players.
-
-![client side hurt animations](images/clientsidehurtanimations.png)
+- Client-Side Hurt Animation
+- Client-Side Auto-Block
+- 0th Person Perspective
+- Perspective Dependant FOVs
 
 </details>
 
-<details><summary>0th Person Perspective</summary>
+<details><summary>Interface</summary>
 
-Press to go into an inaccessible and freaky looking perspective mode.
-
-![0th person perspective](images/0thpersonperspective.png)
-
-</details>
-
-<details><summary>Perspective Dependant FOVs</summary>
-
-Allows you to set specific FOVs for different perspectives.
-
-![1st person picture](images/perspectivedependantfovsinfirstperson.png)
-![2nd person picture](images/perspectivedependantfovswithsecondperson.png)
+- Smooth Slot Hovering
+- Snap Item Rendering
+- Don't Render Empty Tooltips
+- Silently Decline Server Resource Packs
+- Unformat Chat Logs
+- Hide Missing Signature Errors
+- Custom Color Codes
 
 </details>
 
-<details><summary>Custom Color Codes</summary>
+<details><summary>Modern Features</summary>
 
-Allows you to set custom colors for different colors and their shadows.
-
-![color codes picture](images/colorcodespicture.png)
-
-</details>
-
-### Inventory
-
-<details><summary>Smooth Slot Hovering</summary>
-
-Draws square highlights at your mouse instead of snapping to slots.
-
-![smooth slot hovering](images/smoothslothovering.png)
-
-</details>
-
-<details><summary>Snap Item Rendering</summary>
-
-Snaps your held item in inventories to the currently hovered slot.
-
-</details>
-
-<details><summary>Don't Render Empty Tooltips</summary>
-
-Don't render empty tooltips. 
-Requires advanced tooltips (F3+H) to be off.
-
-![without it on](images/emptytooltiprenderedinbazaar.png)
-![with it on](images/emptytooltipNOTrenderedinbazaar.png)
-
-</details>
-
-### Other
-
-<details><summary>Silently Decline Server Resource Packs</summary>
-
-Silently decline server resource packs, but tell the server that you successfully downloaded them.
-You can add a chat message to tell when a server tries to send you a resource pack.
-
-![sdsrp](images/sdsrp.png)
-
-</details>
-
-<details><summary>Unformat Chat Logs</summary>
-
-Properly removes formatting from chat messages before logging them.
-
-![unformatchatlogs1](images/unformatchatlogs1.png)
-![unformatchatlogs2](images/unformatchatlogs2.png)
-
-</details>
-
-<details><summary>Hide Missing Signature Errors</summary>
-
-Hides "Signature is missing from textures payload" errors from being logged.
+- Book Background (1.14+)
+- Keep Chat History on Chat Clear (1.15.2+)
+- Change Window Title (1.15.2+)
+- Damage Tilt (1.19.4+)
+- Hand Swings (1.15+)
 
 </details>
 
