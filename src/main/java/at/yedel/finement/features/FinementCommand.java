@@ -7,9 +7,11 @@ import cc.polyfrost.oneconfig.libs.universal.ChatColor;
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
+import cc.polyfrost.oneconfig.utils.commands.annotations.Greedy;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 import cc.polyfrost.oneconfig.utils.commands.annotations.SubCommand;
 import net.minecraft.event.HoverEvent;
+import org.lwjgl.opengl.Display;
 
 import static at.yedel.finement.Finement.FINEMARK;
 
@@ -47,4 +49,11 @@ public class FinementCommand {
 	public void formatting() {
 		UChat.chat(FORMATTING_GUIDE_MESSAGE);
 	}
+
+	@SubCommand(description = "Sets the title of the game window.")
+	public void settitle(@Greedy String title) {
+		Display.setTitle(title);
+		UChat.chat(FINEMARK + " §eSet display title to \"§f" + title + "§e\"!");
+	}
+
 }

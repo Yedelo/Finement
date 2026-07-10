@@ -225,7 +225,7 @@ public class FinementConfig extends Config {
 
 	@Switch(
 		name = "Change Window Title (1.15.2+)",
-		description = "Changes the window title on world and server join.",
+		description = "Changes the window title on world and server join. Can also be changed with /finement settitle [title].",
 		category = "Modern Features",
 		subcategory = "General"
 	)
