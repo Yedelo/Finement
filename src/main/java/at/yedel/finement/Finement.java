@@ -36,8 +36,6 @@ public class Finement {
 	public void init(FMLInitializationEvent event) {
 		FinementConfig.getInstance().preload();
 		CommandManager.register(FinementCommand.getInstance());
-		MinecraftForge.EVENT_BUS.register(ClientSideHurtAnimation.getInstance());
-		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
 		registerEventListeners(
 			ClientSideHurtAnimation.getInstance(),
 			SilentlyDeclineServerResourcePacks.getInstance(),
