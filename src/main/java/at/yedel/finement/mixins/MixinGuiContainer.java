@@ -39,10 +39,10 @@ public abstract class MixinGuiContainer {
 	@ModifyArgs(method = "drawScreen", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/inventory/GuiContainer;drawGradientRect(IIIIII)V"))
 	private void finement$smoothSlotHovering(Args args) {
 		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().smoothSlotHovering) {
-			args.set(1, finement$mouseX - guiLeft - 8);
-			args.set(2, finement$mouseY - guiTop - 8);
-			args.set(3, finement$mouseX - guiLeft + 8);
-			args.set(4, finement$mouseY - guiTop + 8);
+			args.set(0, finement$mouseX - guiLeft - 8);
+			args.set(1, finement$mouseY - guiTop - 8);
+			args.set(2, finement$mouseX - guiLeft + 8);
+			args.set(3, finement$mouseY - guiTop + 8);
 		}
 	}
 
