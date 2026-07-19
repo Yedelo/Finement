@@ -42,6 +42,7 @@ public class FinementConfig extends Config {
 		addDependency("zerothPersonFOV", "perspectiveDependantFOVs");
 		addDependency("sdsrpChatMessage", "silentlyDeclineServerResourcePacks");
 		addDependency("damageTiltStrength", "damageTilt");
+		DontObfuscateText.configInitialized();
 	}
 
 	@Switch(
@@ -167,6 +168,14 @@ public class FinementConfig extends Config {
 		subcategory = "Inventory"
 	)
 	public boolean dontRenderEmptyTooltips = true;
+
+	@Switch(
+		name = "Don't Obfuscate Text",
+		description = "Don't show text in the obfuscated style. Text will likely still be meaningless.",
+		category = "Interface",
+		subcategory = "Other"
+	)
+	public boolean dontObfuscateText = false;
 
 	@Switch(
 		name = "Silently Decline Server Resource Packs",

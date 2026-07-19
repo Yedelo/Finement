@@ -8,6 +8,7 @@
     "AccessorFontRenderer",
     "MixinEntityPlayerSP",
     "MixinEntityRenderer",
+    "MixinFontRenderer",
     "MixinGuiContainer",
     "MixinGuiNewChat",
     "MixinGuiScreen",
