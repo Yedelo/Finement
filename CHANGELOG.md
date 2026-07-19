@@ -1,3 +1,3 @@
-**1.3.1**
+**1.3.2**
 
-- Add /finement settitle to compliment Change Window Title
+- Add don't obfuscate text

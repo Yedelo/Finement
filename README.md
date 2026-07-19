@@ -25,6 +25,7 @@ Refines the game with QOL gameplay extensions
 
 <details><summary>Interface</summary>
 
+- Don't Obfuscate Text
 - Smooth Slot Hovering
 - Snap Item Rendering
 - Don't Render Empty Tooltips
