@@ -12,4 +12,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface AccessorFontRenderer {
 	@Accessor("colorCode")
 	int[] finement$getColorCodeArray();
+
+	@Accessor("randomStyle")
+	boolean finement$getRandomStyle();
 }

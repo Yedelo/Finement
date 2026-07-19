@@ -9,6 +9,7 @@
     "MixinEntityPlayerSP",
     "MixinEntityRenderer",
     "MixinFontRenderer",
+    "MixinFontRendererHook",
     "MixinGuiContainer",
     "MixinGuiNewChat",
     "MixinGuiScreen",
