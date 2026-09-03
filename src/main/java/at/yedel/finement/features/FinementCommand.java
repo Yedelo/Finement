@@ -55,5 +55,4 @@ public class FinementCommand {
 		Display.setTitle(title);
 		UChat.chat(FINEMARK + " §eSet display title to \"§f" + title + "§e\"!");
 	}
-
 }

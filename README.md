@@ -2,8 +2,6 @@
 
 ![logo](src/main/resources/assets/finement/finement.png)
 
-[Modrinth](https://modrinth.com/project/finement)
-
 ![discord yedel](https://img.shields.io/badge/discord-yedel-blue)
 
 ![github release version](https://img.shields.io/github/v/release/Yedelo/finement?include_prereleases&label=github)
