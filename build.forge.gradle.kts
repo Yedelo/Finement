@@ -43,7 +43,7 @@ plugins {
 
 dependencies {
     listOf("implementation", "shade").forEach {
-        ("cc.polyfrost:oneconfig-wrapper-launchwrapper:${sc.properties.getAs<String>("versions.oneconfigwrapper")}")
+        it("cc.polyfrost:oneconfig-wrapper-launchwrapper:${sc.properties.getAs<String>("versions.oneconfigwrapper")}")
     }
     compileOnly("cc.polyfrost:oneconfig-${mcData.version}-${mcData.loader}:$oneconfigVersion")
     compileOnly("org.spongepowered:mixin:0.7.11-SNAPSHOT")
@@ -52,6 +52,7 @@ dependencies {
 toolkitLoomHelper {
     disableRunConfigs(GameSide.SERVER)
 
+    useTweaker("cc.polyfrost.oneconfig.loader.stage0.LaunchWrapperTweaker")
     useForgeMixin(modId)
     useMixinRefMap("$modId.refmap")
 
