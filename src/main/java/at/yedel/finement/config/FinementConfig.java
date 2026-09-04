@@ -3,6 +3,7 @@ package at.yedel.finement.config;
 
 
 import at.yedel.finement.mixins.AccessorFontRenderer;
+//? if v0 {
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.*;
 import cc.polyfrost.oneconfig.config.core.OneColor;
@@ -10,11 +11,21 @@ import cc.polyfrost.oneconfig.config.core.OneKeyBind;
 import cc.polyfrost.oneconfig.config.data.InfoType;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
+//?} else {
+/*import org.polyfrost.compose.render.PolyColor;
+import org.polyfrost.oneconfig.api.config.v1.Config;
+import org.polyfrost.oneconfig.api.config.v1.annotations.*;
+import org.polyfrost.oneconfig.api.ui.v1.keybind.KeybindHelper;
+import org.polyfrost.oneconfig.api.ui.v1.keybind.OneConfigKeybind;
+*///?}
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
+import org.polyfrost.oneconfig.internal.legacy.InputConstants;
+import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
 
 
 
+//~ config_bridge
 public class FinementConfig extends Config {
 	private static final FinementConfig INSTANCE = new FinementConfig();
 
@@ -26,16 +37,20 @@ public class FinementConfig extends Config {
 	public final int[] customColorCodes = new int[32];
 
 	private FinementConfig() {
+		//? if v0 {
 		super(new Mod("Finement", ModType.UTIL_QOL, "/assets/finement/finement.png"), "finement.json", true, true);
 		initialize();
-		setupColorCodes();
-
-		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
-		addDependency("rotateSwordInThirdPerson", "clientSideAutoBlock");
 		registerKeyBind(zerothPersonPerspectiveKeybind, () -> {
 			// it is a bit misleading
 			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
+		//?} else {
+		//super("Finement", "assets/finement/finement.png", "finement", Category.QOL);
+		//?}
+
+		setupColorCodes();
+		addDependency("onlyEnableOnRealPlayers", "clientSideHurtAnimation");
+		addDependency("rotateSwordInThirdPerson", "clientSideAutoBlock");
 		addDependency("firstPersonFOV", "perspectiveDependantFOVs");
 		addDependency("secondPersonFOV", "perspectiveDependantFOVs");
 		addDependency("thirdPersonFOV", "perspectiveDependantFOVs");
@@ -44,6 +59,21 @@ public class FinementConfig extends Config {
 		addDependency("damageTiltStrength", "damageTilt");
 		DontObfuscateText.configInitialized();
 	}
+
+	public void open() {
+		//? if v0
+		openGui();
+		//? else
+		//ScreensKt.openUI(this);
+	}
+
+	//? if v1 {
+	/*@Switch(
+		name = "Enabled",
+		description = "Global toggle for the mod."
+	)
+	public boolean enabled = true;
+	*///?}
 
 	@Switch(
 		name = "Client-Side Hurt Animation",
@@ -83,7 +113,12 @@ public class FinementConfig extends Config {
 		category = "Gameplay",
 		subcategory = "Perspective"
 	)
-	public OneKeyBind zerothPersonPerspectiveKeybind = new OneKeyBind(Keyboard.KEY_O);
+	public OneKeyBind zerothPersonPerspectiveKeybind =
+	//? if v0 {
+		 new OneKeyBind(Keyboard.KEY_O);
+	//?} else {
+		//KeybindHelper.builder().key(InputConstants.KEY_O).action(() -> Minecraft.getMinecraft().gameSettings.thirdPersonView = -1).register();
+	//?}
 
 	@Switch(
 		name = "Perspective Dependant FOVs",
@@ -209,10 +244,10 @@ public class FinementConfig extends Config {
 	)
 	public boolean hideMissingSignatureErrors = true;
 
-	@Header(
-		text = "Features backported from modern versions of the game.",
-		category = "Modern Features",
-		size = 2
+	@Info(
+		name = "Features backported from modern versions of the game.",
+		category = "Modern Features"
+		/*? if v0 {*/, size = 2 /*?}*/
 	)
 	private transient int header$3 = 1;
 
@@ -260,11 +295,11 @@ public class FinementConfig extends Config {
 	public int damageTiltStrength = 1;
 
 	@Info(
-		text = "Note: This only swings your hand client-side.",
+		name = "Note: This only swings your hand client-side.",
 		type = InfoType.INFO,
 		category = "Modern Features",
-		subcategory = "Hand Swings",
-		size = 2
+		subcategory = "Hand Swings"
+		/*? if v0 {*/, size = 2 /*?}*/
 	)
 	private transient int info$6 = 1;
 
@@ -331,6 +366,7 @@ public class FinementConfig extends Config {
 		addListener("colorCodeToggle", () -> {
 			System.arraycopy(colorCodeToggle ? customColorCodes : originalColorCodes, 0, ((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, 32);
 		});
+
 	}
 
 	private void loadCustomColorCodes() {
@@ -375,17 +411,17 @@ public class FinementConfig extends Config {
 	}
 
 	@Info(
-		text = "Use /finement formatting to view the different color codes.",
+		name = "Use /finement formatting to view the different color codes.",
 		type = InfoType.INFO,
-		size = 2,
 		category = "Custom Color Codes"
+		/*? if v0 {*/, size = 2 /*?}*/
 	)
 	private Object info = null;
 
 	@Switch(
 		name = "Color Code Toggle",
-		category = "Custom Color Codes",
-		size = 2
+		category = "Custom Color Codes"
+		/*? if v0 {*/, size = 2 /*?}*/
 	)
 	public boolean colorCodeToggle = false;
 
@@ -394,7 +430,7 @@ public class FinementConfig extends Config {
 		text = "Randomize",
 		category = "Custom Color Codes"
 	)
-	private Runnable randomizeColorCodes = () -> {
+	private void randomizeColorCodes() {
 		mainColor$0 = randomColor();
 		mainColor$1 = randomColor();
 		mainColor$2 = randomColor();
@@ -435,7 +471,7 @@ public class FinementConfig extends Config {
 		text = "Reset",
 		category = "Custom Color Codes"
 	)
-	private Runnable resetColorCodes = () -> {
+	private void resetColorCodes() {
 		mainColor$0 = new OneColor(0);
 		mainColor$1 = new OneColor(170);
 		mainColor$2 = new OneColor(43520);

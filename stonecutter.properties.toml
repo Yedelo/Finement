@@ -9,3 +9,4 @@ versions.oneconfigwrapper = "1.0.0-beta+"
 ["1.8.9-ornithe"]
 versioning = "single"
 versions.oneconfig = "1.1.12"
+versions.osl = "0.20.3+mc14w27a-mc1.14.4"

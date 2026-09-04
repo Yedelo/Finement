@@ -5,6 +5,7 @@ package at.yedel.finement.features.modern;
 import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.utils.SwingItemDuck;
 import cc.polyfrost.oneconfig.events.event.SendPacketEvent;
+import net.minecraft.client.Minecraft;
 import cc.polyfrost.oneconfig.libs.eventbus.Subscribe;
 import cc.polyfrost.oneconfig.libs.universal.UMinecraft;
 import cc.polyfrost.oneconfig.libs.universal.wrappers.UPlayer;
@@ -36,7 +37,9 @@ public class ItemSwings {
         .add("minecraft:snowball")
         .build();
 
-    private ItemSwings() {}
+    private ItemSwings() {
+
+    }
 
     @SubscribeEvent
     public void swingOnSwingableUse(PlayerInteractEvent event) {
@@ -78,6 +81,6 @@ public class ItemSwings {
     }
 
     private void swing() {
-        ((SwingItemDuck) UPlayer.getPlayer()).finement$swingItemLocally();
+        ((SwingItemDuck) Minecraft.getMinecraft().thePlayer).finement$swingItemLocally();
     }
 }

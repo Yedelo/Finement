@@ -12,6 +12,8 @@ pluginManagement {
         maven("https://maven.deftu.dev/snapshots")
         maven("https://maven.kikugie.dev/releases") { name = "KikuGie Releases" }
         maven("https://maven.kikugie.dev/snapshots") { name = "KikuGie Snapshots" }
+        maven("https://maven.ornithemc.net/releases")
+        maven("https://maven.ornithemc.net/snapshots")
     }
 }
 
@@ -26,5 +28,6 @@ stonecutter {
         }
 
         registerProject("1.8.9", "forge", "ornithe")
+        vcsVersion = "1.8.9-forge"
     }
 }

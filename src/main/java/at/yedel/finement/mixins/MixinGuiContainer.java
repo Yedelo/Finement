@@ -3,6 +3,7 @@ package at.yedel.finement.mixins;
 
 
 import at.yedel.finement.config.FinementConfig;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Slot;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,11 +19,10 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 
 @Mixin(GuiContainer.class)
-public abstract class MixinGuiContainer {
-	@Shadow public abstract Slot getSlotUnderMouse();
-
+public abstract class MixinGuiContainer extends GuiScreen {
 	@Shadow protected int guiLeft;
 	@Shadow protected int guiTop;
+	@Shadow private Slot theSlot;
 	@Unique private int finement$mouseX;
 	@Unique private int finement$mouseY;
 	@Unique private Slot finement$slotUnderMouse;
@@ -32,7 +32,7 @@ public abstract class MixinGuiContainer {
 		this.finement$mouseX = mouseX;
 		this.finement$mouseY = mouseY;
 		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().snapItemRendering) {
-			finement$slotUnderMouse = getSlotUnderMouse();
+			finement$slotUnderMouse = theSlot;
 		}
 	}
 

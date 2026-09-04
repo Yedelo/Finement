@@ -8,7 +8,6 @@ import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.features.ClientSideHurtAnimation;
 import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
-import at.yedel.finement.features.modern.BookBackground;
 import at.yedel.finement.features.modern.ChangeWindowTitle;
 import at.yedel.finement.features.modern.ItemSwings;
 import cc.polyfrost.oneconfig.events.EventManager;
@@ -40,7 +39,6 @@ public class Finement {
 			ClientSideHurtAnimation.getInstance(),
 			SilentlyDeclineServerResourcePacks.getInstance(),
 
-			BookBackground.getInstance(),
 			ChangeWindowTitle.getInstance(),
 			ItemSwings.getInstance()
 		);

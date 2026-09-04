@@ -13,6 +13,7 @@
     "MixinGuiContainer",
     "MixinGuiNewChat",
     "MixinGuiScreen",
+    "MixinGuiScreenBook",
     "MixinIntegratedServer",
     "MixinItemBucket",
     "MixinItemRenderer",

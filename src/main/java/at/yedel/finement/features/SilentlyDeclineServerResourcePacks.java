@@ -7,7 +7,11 @@ import java.util.Random;
 import at.yedel.finement.config.FinementConfig;
 import cc.polyfrost.oneconfig.events.event.ReceivePacketEvent;
 import cc.polyfrost.oneconfig.libs.eventbus.Subscribe;
-import cc.polyfrost.oneconfig.libs.universal.UChat;
+//? if v0 {
+ import cc.polyfrost.oneconfig.libs.universal.UChat;
+//?} else {
+//import org.polyfrost.oneconfig.api.platform.v1.Platform;
+//?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C19PacketResourcePackStatus;
 import net.minecraft.network.play.client.C19PacketResourcePackStatus.Action;

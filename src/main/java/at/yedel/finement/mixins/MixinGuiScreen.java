@@ -5,7 +5,11 @@ package at.yedel.finement.mixins;
 import java.util.List;
 
 import at.yedel.finement.config.FinementConfig;
-import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
+//? if v0 {
+ import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
+//?} else {
+//import org.polyfrost.oneconfig.api.platform.v1.Platform;
+//?}
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +33,7 @@ public abstract class MixinGuiScreen {
 	)
 	private void finement$dontRenderEmptyTooltip(ItemStack stack, int x, int y, CallbackInfo ci, List<String> list) {
 		if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().dontRenderEmptyTooltips) {
-			if (list.stream().map(UTextComponent.Companion::stripFormatting).allMatch(string -> string.trim().isEmpty())) {
+			if (list.stream().map((string) -> UTextComponent.Companion.stripFormatting(string)).allMatch(string -> string.trim().isEmpty())) {
 				ci.cancel();
 			}
 		}

@@ -12,7 +12,7 @@ stonecutter parameters {
     val v1 = !v0
 
     constants {
-        match(loader, "forge", "fabric")
+        match(loader, "forge", "ornithe")
         this["v0"] = v0
         this["v1"] = v1
     }
@@ -28,12 +28,7 @@ stonecutter parameters {
             replace("    @Info(\n" + "        text = ", "    @Info(\n" + "        title = ")
             replace("type = InfoType.INFO,", "//type = InfoType.INFO,")
             replace("    @CustomOption(id = \"empty\")\n" + "    @Empty", "    @Info /* command */ ")
-        }
-
-        string(v1, "texthud_bridge") {
-            replace("extends SingleTextHud", "extends TextHud")
-            replace("protected String getText(boolean example)", "protected String getText()")
-            replace("if (example)", "if (!isReal() || HudManager.INSTANCE.isEditing())")
+            replace("addListener", "addCallback")
         }
 
         string(v1, "command_bridge") {
@@ -51,11 +46,10 @@ stonecutter parameters {
             replace("ReceivePacketEvent", "PacketEvent.Receive")
             replace("WorldLoadEvent", "WorldEvent.Load")
             replace("event.packet", "event.getPacket()")
-            replace("UTextComponent.Companion.stripFormatting(event.message.getUnformattedText())", "event.getFullyUnformattedMessage()")
+            replace("UTextComponent.Companion.stripFormatting", "Platform.i18n().getUnformattedText")
             replace("UChat.chat", "Platform.compatibility().displayChatMessage")
             replace("UChat.say", "Minecraft.getInstance().player.connection.sendChat")
             replace("event.isCancelled", "event.cancelled")
-            replace("Minecraft.getMinecraft().addScheduledTask", "Minecraft.getInstance().schedule")
         }
     }
 
