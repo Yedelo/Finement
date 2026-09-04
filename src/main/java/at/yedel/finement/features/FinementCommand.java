@@ -11,12 +11,13 @@ import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Greedy;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 import cc.polyfrost.oneconfig.utils.commands.annotations.SubCommand;
-import net.minecraft.util.HoverEvent;
-//?} else {
+import net.minecraft.event.HoverEvent;
+    //?} else {
 /*import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
-import org.polyfrost.oneconfig.api.platform.v1.Platform;
+import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler;
+import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 *///?}
 import org.lwjgl.opengl.Display;
 

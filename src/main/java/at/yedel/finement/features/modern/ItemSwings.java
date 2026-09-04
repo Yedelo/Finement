@@ -4,11 +4,12 @@ package at.yedel.finement.features.modern;
 
 import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.utils.SwingItemDuck;
-import cc.polyfrost.oneconfig.events.event.SendPacketEvent;
+//? if v0
+ import cc.polyfrost.oneconfig.events.event.SendPacketEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import cc.polyfrost.oneconfig.events.event.ReceivePacketEvent;
 import cc.polyfrost.oneconfig.libs.eventbus.Subscribe;
-import cc.polyfrost.oneconfig.libs.universal.UMinecraft;
-import cc.polyfrost.oneconfig.libs.universal.wrappers.UPlayer;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.Item;
@@ -16,8 +17,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Objects;
 
@@ -37,31 +36,28 @@ public class ItemSwings {
         .add("minecraft:snowball")
         .build();
 
-    private ItemSwings() {
+    private ItemSwings() {}
 
-    }
-
-    @SubscribeEvent
-    public void swingOnSwingableUse(PlayerInteractEvent event) {
+    public void swingOnSwingableUse(EntityPlayer player) {
         if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().itemUseSwings) {
-            ItemStack itemStack = event.entityPlayer.getHeldItem();
+            ItemStack itemStack = player.getHeldItem();
             if (itemStack == null) {
                 return;
             }
             Item item = itemStack.getItem();
-            String registryName = item.getRegistryName();
+            String registryName = Item.itemRegistry.getNameForObject(item).toString();
             if (SWING_ITEMS.contains(registryName)) {
                 swing();
             }
             else if (Objects.equals(registryName, "minecraft:potion") && ItemPotion.isSplash(itemStack.getMetadata())) {
                 swing();
             }
-            else if (Objects.equals(registryName, "minecraft:ender_pearl") && !UMinecraft.getMinecraft().playerController.isInCreativeMode()) {
+            else if (Objects.equals(registryName, "minecraft:ender_pearl") && !Minecraft.getMinecraft().playerController.isInCreativeMode()) {
                 swing();
             }
             else if (item instanceof ItemArmor) {
                 int slot = EntityLiving.getArmorPosition(itemStack) - 1;
-                if (event.entityPlayer.getCurrentArmor(slot) == null) {
+                if (player.getCurrentArmor(slot) == null) {
                     swing();
                 }
             }
@@ -73,7 +69,7 @@ public class ItemSwings {
         if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().itemDropSwings) {
             if (event.packet instanceof C07PacketPlayerDigging) {
                 C07PacketPlayerDigging.Action action = ((C07PacketPlayerDigging) event.packet).getStatus();
-                if ((action == C07PacketPlayerDigging.Action.DROP_ALL_ITEMS || action == C07PacketPlayerDigging.Action.DROP_ITEM) && UPlayer.getPlayer().getHeldItem() != null) {
+                if ((action == C07PacketPlayerDigging.Action.DROP_ALL_ITEMS || action == C07PacketPlayerDigging.Action.DROP_ITEM) && Minecraft.getMinecraft().thePlayer.getHeldItem() != null) {
                     swing();
                 }
             }

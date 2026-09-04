@@ -8,7 +8,7 @@ import at.yedel.finement.config.FinementConfig;
 //? if v0 {
  import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 //?} else {
-//import org.polyfrost.oneconfig.api.platform.v1.Platform;
+//import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 //?}
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;

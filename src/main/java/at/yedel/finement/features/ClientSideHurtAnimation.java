@@ -17,16 +17,7 @@ public class ClientSideHurtAnimation {
 		return INSTANCE;
 	}
 
-	private ClientSideHurtAnimation() {
-		PlayerInteractionEvents.class
-	}
-
-	//? if forge {
-	@SubscribeEvent
-	public void onAttack(AttackEntityEvent event) {
-		doClientSideHurtAnimation(event.target);
-	}
-	//?}
+	private ClientSideHurtAnimation() {}
 
 	public void doClientSideHurtAnimation(Entity target) {
 		if (!FinementConfig.getInstance().enabled || !FinementConfig.getInstance().clientSideHurtAnimation) return;
@@ -37,8 +28,6 @@ public class ClientSideHurtAnimation {
 			targetEntity.performHurtAnimation();
 		}
 	}
-
-
 
 	private boolean isRealPlayer(Entity entity) {
 		return entity instanceof EntityPlayer && entity.getUniqueID().version() == 4;

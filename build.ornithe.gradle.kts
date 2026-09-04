@@ -22,8 +22,9 @@ val license: String by project
 val javaVersion = JavaVersion.VERSION_25
 
 repositories {
-    fun scopedMaven(url: String, vararg groups: String, includeSubgroups: Boolean = false) = maven(url) {
-        content { for (group in groups) if (!includeSubgroups) includeGroup(group) else includeGroupAndSubgroups(group) }
+    fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
+        forRepository { maven(url) { name = alias } }
+        filter { groups.forEach(::includeGroup) }
     }
 
     mavenCentral()
@@ -35,25 +36,8 @@ repositories {
     maven("https://maven.terraformersmc.com/releases")
     maven("https://repo.hypixel.net/repository/Hypixel/")
     maven("https://maven.fabricmc.net/releases")
-    scopedMaven("https://central.sonatype.com/repository/maven-snapshots/", "net.kyori")
-    maven("https://api.modrinth.com/maven") {
-        content { includeGroup("maven.modrinth") }
-    }
     maven("https://maven.ornithemc.net/releases")
     maven("https://maven.ornithemc.net/snapshots")
-    maven("https://maven.cloverclient.com/releases") {
-        content { includeGroup("pl.tomgirl") }
-    }
-
-    fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
-        forRepository { maven(url) { name = alias } }
-        filter { groups.forEach(::includeGroup) }
-    }
-
-    mavenCentral()
-    google()
-    maven("https://repo.polyfrost.org/releases") { name = "Polyfrost Releases" }
-    maven("https://repo.polyfrost.org/snapshots") { name = "Polyfrost Snapshots" }
     maven("https://central.sonatype.com/repository/maven-snapshots") {
         name = "Sonatype Snapshots"
         content { includeGroup("net.kyori") }
@@ -62,8 +46,6 @@ repositories {
         content { includeGroup("pl.tomgirl") }
     }
     strictMaven("https://maven.deftu.dev/releases", "Deftu", "dev.deftu")
-    strictMaven("https://maven.terraformersmc.com/", "TerraformersMC", "com.terraformersmc")
-    strictMaven("https://maven.fabricmc.net/", "FabricMC", "net.fabricmc")
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 }
@@ -72,6 +54,7 @@ plugins {
     id("net.fabricmc.fabric-loom-remap") version "1.16-SNAPSHOT"
     id("ploceus") version "1.16-SNAPSHOT"
     id("dev.deftu.gradle.tools.bloom") version "2.73.0"
+    id("dev.deftu.gradle.tools.ducks") version "2.73.0"
 }
 
 dependencies {
@@ -79,8 +62,10 @@ dependencies {
     mappings(ploceus.mcpMappings("stable", "1.8.9", "22"))
     implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     implementation("org.polyfrost.oneconfig:${sc.current.version}-ornithe:$oneconfigVersion")
-    ploceus.dependOsl(sc.properties["versions.osl"])
     compileOnly("net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7")
+    implementation("net.ornithemc.osl-gen2:entrypoints:${sc.properties["versions.oslentrypoints"]}")
+    implementation("net.ornithemc.osl-gen2:core:${sc.properties["versions.oslcore"]}")
+    implementation("net.ornithemc.osl-gen2:networking:${sc.properties["versions.oslnetworking"]}")
 }
 
 loom {

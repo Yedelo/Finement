@@ -8,6 +8,8 @@ import net.minecraft.client.multiplayer.ServerData;
 //? if forge {
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
+//?} else {
+//import net.ornithemc.osl.networking.api.client.ClientConnectionEvents;
 //?}
 import org.lwjgl.opengl.Display;
 
@@ -23,14 +25,28 @@ public class ChangeWindowTitle {
     }
 
     private ChangeWindowTitle() {
+        //? if ornithe {
+        /*ClientConnectionEvents.PLAY_READY.register((context) -> onServerJoin());
+        ClientConnectionEvents.DISCONNECT.register((context) -> onServerDisconnect());
+        *///?}
+    }
 
+    //? if forge {
+    @SubscribeEvent
+    public void onForgeJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+        onServerJoin();
     }
 
     @SubscribeEvent
-    public void onServerJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+    public void onForgeDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+        onServerDisconnect();
+    }
+    //?}
+
+    public void onServerJoin() {
         if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().changeWindowTitle) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                if (event.isLocal) {
+                if (Minecraft.getMinecraft().isSingleplayer()) {
                     Display.setTitle("Minecraft 1.8.9 - Singleplayer");
                     return;
                 }
@@ -45,8 +61,8 @@ public class ChangeWindowTitle {
         }
     }
 
-    @SubscribeEvent
-    public void onDisconnectFromServer(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+
+    public void onServerDisconnect() {
         Minecraft.getMinecraft().addScheduledTask(() -> {
             if ((FinementConfig.getInstance().enabled && FinementConfig.getInstance().changeWindowTitle) || !Objects.equals(Display.getTitle(), "Minecraft 1.8.9")) {
                 Display.setTitle("Minecraft 1.8.9");

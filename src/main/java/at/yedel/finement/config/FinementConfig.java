@@ -17,11 +17,12 @@ import org.polyfrost.oneconfig.api.config.v1.Config;
 import org.polyfrost.oneconfig.api.config.v1.annotations.*;
 import org.polyfrost.oneconfig.api.ui.v1.keybind.KeybindHelper;
 import org.polyfrost.oneconfig.api.ui.v1.keybind.OneConfigKeybind;
+import org.polyfrost.oneconfig.internal.legacy.InputConstants;
+import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
 *///?}
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
-import org.polyfrost.oneconfig.internal.legacy.InputConstants;
-import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
+
 
 
 
@@ -244,13 +245,6 @@ public class FinementConfig extends Config {
 	)
 	public boolean hideMissingSignatureErrors = true;
 
-	@Info(
-		name = "Features backported from modern versions of the game.",
-		category = "Modern Features"
-		/*? if v0 {*/, size = 2 /*?}*/
-	)
-	private transient int header$3 = 1;
-
 	@Switch(
 		name = "Book Background (1.14+)",
 		description = "Draws the default dark background in book GUIs.",
@@ -293,15 +287,6 @@ public class FinementConfig extends Config {
 		step = 1
 	)
 	public int damageTiltStrength = 1;
-
-	@Info(
-		name = "Note: This only swings your hand client-side.",
-		type = InfoType.INFO,
-		category = "Modern Features",
-		subcategory = "Hand Swings"
-		/*? if v0 {*/, size = 2 /*?}*/
-	)
-	private transient int info$6 = 1;
 
 	@Switch(
 		name = "Item Uses (1.15+)",
@@ -409,14 +394,6 @@ public class FinementConfig extends Config {
 	private static OneColor randomColor() {
 		return new OneColor((int) (Math.random() * 16777215));
 	}
-
-	@Info(
-		name = "Use /finement formatting to view the different color codes.",
-		type = InfoType.INFO,
-		category = "Custom Color Codes"
-		/*? if v0 {*/, size = 2 /*?}*/
-	)
-	private Object info = null;
 
 	@Switch(
 		name = "Color Code Toggle",

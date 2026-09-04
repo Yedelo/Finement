@@ -2,6 +2,7 @@
   "compatibilityLevel": "${mixinJava}",
   "package": "at.yedel.finement.mixins",
   "mixins": [
+    "MixinEntityPlayer",
     "MixinYggdrasilMinecraftSessionService"
   ],
   "client": [
@@ -18,6 +19,7 @@
     "MixinItemBucket",
     "MixinItemRenderer",
     "MixinLayerHeldItem",
+    "MixinMinecraft",
     "MixinRenderPlayer"
   ]
 }
