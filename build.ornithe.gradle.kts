@@ -2,7 +2,6 @@ import jdk.jfr.internal.JVM.exclude
 import org.gradle.api.tasks.Copy
 import org.gradle.internal.Actions.set
 import org.gradle.kotlin.dsl.invoke
-import sun.tools.jar.resources.jar
 import kotlin.reflect.KProperty
 
 // in stonecutter.gradle.kts
@@ -51,10 +50,14 @@ repositories {
 }
 
 plugins {
-    id("net.fabricmc.fabric-loom-remap") version "1.16-SNAPSHOT"
-    id("ploceus") version "1.16-SNAPSHOT"
+    id("net.fabricmc.fabric-loom-remap") version "1.17.4"
+    id("ploceus") version "1.17.4"
     id("dev.deftu.gradle.tools.bloom") version "2.73.0"
     id("dev.deftu.gradle.tools.ducks") version "2.73.0"
+}
+
+ploceus {
+    setIntermediaryGeneration(2)
 }
 
 dependencies {
