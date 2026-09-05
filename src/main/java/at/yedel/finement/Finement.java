@@ -46,7 +46,6 @@ public class Finement /*? if ornithe {*/ /*implements ClientModInitializer *//*?
 	private void initialize() {
 		FinementConfig.getInstance();
 		CommandManager.register(FinementCommand.getInstance());
-		EventManager.INSTANCE.register(ItemSwings.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
 	}
 

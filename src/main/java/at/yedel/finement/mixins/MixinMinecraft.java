@@ -19,6 +19,6 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "rightClickMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/InventoryPlayer;getCurrentItem()Lnet/minecraft/item/ItemStack;", ordinal = 1))
     private void finement$swing(CallbackInfo ci) {
-        ItemSwings.getInstance().swingOnSwingableUse(thePlayer);
+        ItemSwings.getInstance().onSwingableUse(thePlayer);
     }
 }
