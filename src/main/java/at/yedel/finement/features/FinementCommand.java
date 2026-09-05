@@ -4,23 +4,24 @@ package at.yedel.finement.features;
 
 import at.yedel.finement.config.FinementConfig;
 //? if v0 {
-import cc.polyfrost.oneconfig.libs.universal.ChatColor;
 import cc.polyfrost.oneconfig.libs.universal.UChat;
-import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Greedy;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 import cc.polyfrost.oneconfig.utils.commands.annotations.SubCommand;
+import net.minecraft.client.Minecraft;
 import net.minecraft.event.HoverEvent;
     //?} else {
-/*import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.HoverEvent;
-import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
+/*import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler;
 import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
 *///?}
+import net.minecraft.client.Minecraft;
+import net.minecraft.event.HoverEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.IChatComponent;
 import org.lwjgl.opengl.Display;
-
 
 import static at.yedel.finement.Finement.FINEMARK;
 
@@ -37,8 +38,7 @@ public class FinementCommand {
 
 	private FinementCommand() {}
 
-	//~ if v1 'String FORMATTING_CODES = ' -> 'Component FORMATTING_CODES = Component.text'
-	private static final String FORMATTING_CODES = (
+	private static final ChatComponentText FORMATTING_CODES = new ChatComponentText(
 		"§cC§6o§el§ao§9r §1c§5o§dd§be§3s§r:" + // "Color codes:" (in rainbow)
 			"\n§8Black: §8&0     §4Dark Red: §4&4     §2Dark Green: §2&2     §1Dark Blue: §1&1" +
 			"\n§3Dark Aqua: §3&3     §5Dark Purple: §5&5     §6Gold: §6&6     §7Gray: §7&7" +
@@ -49,13 +49,13 @@ public class FinementCommand {
 			"\n§kObfuscated§r: &k     §r§lBold: §l&l     §r§mStrikethrough: §m&m" +
 			"\n§nUnderline: §n&n§r     §r§oItalic: §o&o    §rReset: §r&r"
 	);
-	//? if v0 {
-    private static final UTextComponent FORMATTING_GUIDE_MESSAGE =
-        new UTextComponent(FINEMARK + " §e§nHover to view the formatting guide.").setHover(HoverEvent.Action.SHOW_TEXT, FORMATTING_CODES);
-    //?} else {
-	/*private static final Component FORMATTING_GUIDE_MESSAGE =
-		Component.text(FINEMARK + " §e§nHover to view the formatting guide.").hoverEvent(HoverEvent.showText(FORMATTING_CODES));
-	*///?}
+    private static final IChatComponent FORMATTING_GUIDE_MESSAGE =
+        new ChatComponentText(FINEMARK + " §e§nHover to view the formatting guide.")
+	        .setChatStyle(
+				new ChatStyle().setChatHoverEvent(
+					new HoverEvent(HoverEvent.Action.SHOW_TEXT, FORMATTING_CODES)
+				)
+	        );
 
 	//~ if v1 '@Main' -> '@org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler'
 	@Main
@@ -65,7 +65,7 @@ public class FinementCommand {
 
 	@SubCommand(description = "Shows formatting codes in chat.")
 	public void formatting() {
-		UChat.chat(FORMATTING_GUIDE_MESSAGE);
+		Minecraft.getMinecraft().thePlayer.addChatMessage(FORMATTING_GUIDE_MESSAGE);
 	}
 
 	@SubCommand(description = "Sets the title of the game window.")
