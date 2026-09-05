@@ -66,8 +66,8 @@ dependencies {
     implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     implementation("org.polyfrost.oneconfig:${sc.current.version}-ornithe:$oneconfigVersion")
     compileOnly("net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7")
-    implementation("net.ornithemc.osl-gen2:entrypoints:${sc.properties["versions.oslentrypoints"]}")
     implementation("net.ornithemc.osl-gen2:core:${sc.properties["versions.oslcore"]}")
+    implementation("net.ornithemc.osl-gen2:entrypoints:${sc.properties["versions.oslentrypoints"]}")
     implementation("net.ornithemc.osl-gen2:networking:${sc.properties["versions.oslnetworking"]}")
 }
 
