@@ -123,12 +123,12 @@ tasks {
     register<Copy>("buildAndCollect") {
         group = "build"
 
-        from(jar.map { it.archiveFile })
+        from(remapJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs"))
         dependsOn("build")
     }
 
-    jar {
+    remapJar {
         archiveFileName = finalFileName
         // manifest.attributes(mapOf())
     }
