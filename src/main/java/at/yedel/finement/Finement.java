@@ -2,11 +2,9 @@ package at.yedel.finement;
 
 
 
-import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.features.FinementCommand;
 import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
 import at.yedel.finement.features.modern.ChangeWindowTitle;
-import at.yedel.finement.features.modern.ItemSwings;
 
 //? if forge {
 import net.minecraftforge.common.MinecraftForge;
@@ -21,7 +19,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import cc.polyfrost.oneconfig.events.EventManager;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 //?} else {
-/*import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
+/*
+import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
 import org.polyfrost.oneconfig.api.event.v1.EventManager;
 *///?}
 
@@ -44,7 +43,6 @@ public class Finement /*? if ornithe {*/ /*implements ClientModInitializer *//*?
 	public static final String FINEMARK = "§6§l< §3§lFinement §6§l>§r";
 
 	private void initialize() {
-		FinementConfig.getInstance();
 		CommandManager.register(FinementCommand.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
 	}
