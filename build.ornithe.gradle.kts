@@ -19,6 +19,9 @@ val maxMc by CommonProperty<String?>()
 val finalFileName by CommonProperty<String>()
 val license: String by project
 val javaVersion = JavaVersion.VERSION_25
+val oslCoreVersion = sc.properties["versions.oslcore"]
+val oslEntrypointsVersion = sc.properties["versions.oslentrypoints"]
+val oslNetworkingVersion = sc.properties["versions.oslnetworking"]
 
 repositories {
     fun strictMaven(url: String, alias: String, vararg groups: String) = exclusiveContent {
@@ -66,9 +69,9 @@ dependencies {
     implementation("net.fabricmc:fabric-loader:$fabricLoaderVersion")
     implementation("org.polyfrost.oneconfig:${sc.current.version}-ornithe:$oneconfigVersion")
     compileOnly("net.fabricmc:sponge-mixin:0.17.4+mixin.0.8.7")
-    implementation("net.ornithemc.osl-gen2:core:${sc.properties["versions.oslcore"]}")
-    implementation("net.ornithemc.osl-gen2:entrypoints:${sc.properties["versions.oslentrypoints"]}")
-    implementation("net.ornithemc.osl-gen2:networking:${sc.properties["versions.oslnetworking"]}")
+    implementation("net.ornithemc.osl-gen2:core:$oslCoreVersion")
+    implementation("net.ornithemc.osl-gen2:entrypoints:$oslEntrypointsVersion")
+    implementation("net.ornithemc.osl-gen2:networking:$oslNetworkingVersion")
 }
 
 loom {
@@ -112,6 +115,9 @@ tasks {
                 if (rangedVersion) ">=${sc.current.version} <=${maxMc}" else sc.current.version
             register("minecraft", minecraftDependency)
             register("oneconfigv1", target(oneconfigVersion))
+            register("oslcore", target(oslCoreVersion))
+            register("oslentrypoints", target(oslEntrypointsVersion))
+            register("oslnetworking", target(oslNetworkingVersion))
             register("mixinJava", "JAVA_${javaVersion.majorVersion}")
             register("mixinMin", "0.8")
         }

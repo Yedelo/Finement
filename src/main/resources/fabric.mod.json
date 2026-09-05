@@ -22,7 +22,10 @@
     "java": "${java}",
     "fabricloader": "${fabricLoader}",
     "minecraft": "${minecraft}",
-    "oneconfigv1": "${oneconfigv1}"
+    "oneconfigv1": "${oneconfigv1}",
+    "osl-core": "${oslcore}",
+    "osl-entrypoints": "${oslentrypoints}",
+    "osl-networking": "${oslnetworking}"
   },
   "recommends": {
     "modmenu": "*"
