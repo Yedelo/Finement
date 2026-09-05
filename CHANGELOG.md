@@ -1,3 +1,3 @@
-**1.3.2**
+**2.0.0-beta.1**
 
-- Add don't obfuscate text
+- Port mod to Ornithe

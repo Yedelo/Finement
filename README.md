@@ -10,6 +10,14 @@
 
 Refines the game with QOL gameplay extensions
 
+
+## Dependencies
+
+| **Environment** | **[OneConfig](https://polyfrost.org/projects/oneconfig)** v0/v1 |
+|:---------------:|:---------------------------------------------------------------:|
+|  Forge (1.8.9)  |                      Bundled (via tweaker)                      |
+| Ornithe (1.8.9) |                  Required (separate download)                   |
+
 ## Features
 
 <details><summary>Gameplay</summary>
