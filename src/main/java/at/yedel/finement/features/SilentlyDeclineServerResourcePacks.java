@@ -17,7 +17,7 @@ import net.minecraft.network.play.client.C19PacketResourcePackStatus;
 import net.minecraft.network.play.client.C19PacketResourcePackStatus.Action;
 import net.minecraft.network.play.server.S48PacketResourcePackSend;
 
-import static at.yedel.finement.Finement.FINEMARK;
+import static at.yedel.finement.launch.FinementConstants.FINEMARK;
 
 
 

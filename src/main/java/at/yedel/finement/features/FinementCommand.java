@@ -3,6 +3,7 @@ package at.yedel.finement.features;
 
 
 import at.yedel.finement.config.FinementConfig;
+import at.yedel.finement.launch.FinementConstants;
 //? if v0 {
 import cc.polyfrost.oneconfig.libs.universal.UChat;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
@@ -21,9 +22,12 @@ import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.IChatComponent;
+import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.Display;
 
-import static at.yedel.finement.Finement.FINEMARK;
+import java.lang.reflect.Field;
+
+import static at.yedel.finement.launch.FinementConstants.FINEMARK;
 
 
 
@@ -72,5 +76,19 @@ public class FinementCommand {
 	public void settitle(/*? if v0 {*/ @Greedy /*?}*/ String title) {
 		Display.setTitle(title);
 		UChat.chat(FINEMARK + " §eSet display title to \"§f" + title + "§e\"!");
+	}
+
+	@SubCommand(description = "Shows mod constants and build information such as the project version.")
+	public void constants() {
+		try {
+			UChat.chat(FINEMARK + " §eConstants:");
+			for (Field field : FinementConstants.class.getDeclaredFields()) {
+				UChat.chat(FINEMARK + " " + field.getName() + ": §r" + field.get(null));
+			}
+		}
+		catch (IllegalAccessException e) {
+			UChat.chat(FINEMARK + " §cCouldn't get mod constants!");
+			LogManager.getLogger("Finement").error("Couldn't get mod constants!", e);
+		}
 	}
 }

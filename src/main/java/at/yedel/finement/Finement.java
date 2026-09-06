@@ -7,6 +7,7 @@ import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
 import at.yedel.finement.features.modern.ChangeWindowTitle;
 
 //? if forge {
+import at.yedel.finement.launch.FinementConstants;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,17 +32,14 @@ import java.util.Map;
 
 //? if forge {
 @Mod(
-	modid = "@MOD_ID@",
-	name = "@MOD_NAME@",
-	version = Finement.VERSION,
+	modid = FinementConstants.MOD_ID,
+	name = FinementConstants.MOD_NAME,
+	version = FinementConstants.MOD_VERSION,
 	clientSideOnly = true,
 	acceptedMinecraftVersions = "1.8.9"
 )
 //?}
 public class Finement /*? if ornithe {*/ /*implements ClientModInitializer *//*?}*/ {
-	public static final String VERSION = "@MOD_VERSION@";
-	public static final String FINEMARK = "§6§l< §3§lFinement §6§l>§r";
-
 	private void initialize() {
 		CommandManager.register(FinementCommand.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
