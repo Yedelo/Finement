@@ -394,7 +394,7 @@ public class FinementConfig extends Config {
 	//~}
 
 	private static OneColor randomColor() {
-		return new OneColor(/*? if v1 {*//* 0xFF000000 | *//*?}*/ (int) (Math.random() * 0xFFFFFF));
+		return new OneColor(/*? if v1 {*/ /*0xFF000000 | *//*?}*/ (int) (Math.random() * 0xFFFFFF));
 	}
 
 	@Switch(

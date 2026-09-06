@@ -26,8 +26,9 @@ public class ChangeWindowTitle {
 
     private ChangeWindowTitle() {
         //? if ornithe {
-        /*ClientConnectionEvents.PLAY_READY.register((context) -> onServerJoin());
-        ClientConnectionEvents.DISCONNECT.register((context) -> onServerDisconnect());
+        /*
+        ClientConnectionEvents.PLAY_READY.register((minecraft) -> onServerJoin());
+        ClientConnectionEvents.DISCONNECT.register((minecraft) -> onServerDisconnect());
         *///?}
     }
 
@@ -44,8 +45,8 @@ public class ChangeWindowTitle {
     //?}
 
     public void onServerJoin() {
-        if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().changeWindowTitle) {
-            Minecraft.getMinecraft().addScheduledTask(() -> {
+        Minecraft.getMinecraft().addScheduledTask(() -> {
+            if (FinementConfig.getInstance().enabled && FinementConfig.getInstance().changeWindowTitle) {
                 if (Minecraft.getMinecraft().isSingleplayer()) {
                     Display.setTitle("Minecraft 1.8.9 - Singleplayer");
                     return;
@@ -57,8 +58,8 @@ public class ChangeWindowTitle {
                 else {
                     Display.setTitle("Minecraft 1.8.9 - " + serverData.serverName + " - " + serverData.serverIP);
                 }
-            });
-        }
+            }
+        });
     }
 
 
