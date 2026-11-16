@@ -746,4 +746,23 @@ public class FinementConfig extends Config {
 	)
 	private OneColor shadowColor$f = new OneColor(4144959);
 	//~}
+
+	@Info(
+		//? if v0 {
+		text = "Finement is not responsible for any bans that occur because of this feature.",
+		type = InfoType.WARNING,
+		//?} else {
+//		title = "Warning",
+//		description = "Finement is not responsible for any bans that occur because of this feature.",
+		//?}
+		category = "Advanced"
+	)
+	public static int empty$0 = 0;
+
+	@Switch(
+		name = "Allow GUIs in Portals",
+		category = "Advanced",
+		description = "Allow opening normal GUIs such as the inventory when inside nether portals."
+	)
+	public boolean allowGuisInPortals = false;
 }
