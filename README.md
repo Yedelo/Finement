@@ -52,3 +52,9 @@ Refines the game with QOL gameplay extensions
 
 </details>
 
+<details><summary>Advanced</summary>
+
+- Allow GUIs in Portals
+
+</details>
+

@@ -1,3 +1,3 @@
 ## **2.0.0**
 
-- Add ornithe support
+- Added Allow GUIs in Portals
