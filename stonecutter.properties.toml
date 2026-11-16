@@ -1,11 +1,6 @@
 versions.fabricloader = "0.19.3"
 versions.devauth = "1.2.2"
 
-["1.8.9-forge"]
-versioning = "single"
-versions.oneconfig = "0.2.2-alpha+"
-versions.oneconfigwrapper = "1.0.0-beta+"
-
 ["1.8.9-ornithe"]
 versioning = "single"
 versions.oneconfig = "1.1.12"
@@ -13,3 +8,8 @@ versions.osl = "0.21.0"
 versions.oslcore = "0.10.0-alpha.6+mc14w27a-mc1.14.4"
 versions.oslentrypoints = "0.6.1+mc13w16a-mc1.14.4"
 versions.oslnetworking = "0.10.0-alpha.4+mc13w41a-mc18w30b"
+
+["1.8.9-forge"]
+versioning = "single"
+versions.oneconfig = "0.2.2-alpha+"
+versions.oneconfigwrapper = "1.0.0-beta+"

@@ -5,18 +5,18 @@ package at.yedel.finement.features;
 import at.yedel.finement.config.FinementConfig;
 import at.yedel.finement.launch.FinementConstants;
 //? if v0 {
-import cc.polyfrost.oneconfig.libs.universal.UChat;
+/*import cc.polyfrost.oneconfig.libs.universal.UChat;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Command;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Greedy;
 import cc.polyfrost.oneconfig.utils.commands.annotations.Main;
 import cc.polyfrost.oneconfig.utils.commands.annotations.SubCommand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.event.HoverEvent;
-    //?} else {
-/*import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
+    *///?} else {
+import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Command;
 import org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler;
-import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
-*///?}
+import org.polyfrost.oneconfig.api.platform.v1.Platform;
+//?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
@@ -62,32 +62,32 @@ public class FinementCommand {
 	        );
 
 	//~ if v1 '@Main' -> '@org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler'
-	@Main
+	@org.polyfrost.oneconfig.api.commands.v1.factories.annotated.Handler
 	private void main() {
 		FinementConfig.getInstance().open();
 	}
 
-	@SubCommand(description = "Shows formatting codes in chat.")
+	@Handler(description = "Shows formatting codes in chat.")
 	public void formatting() {
 		Minecraft.getMinecraft().thePlayer.addChatMessage(FORMATTING_GUIDE_MESSAGE);
 	}
 
-	@SubCommand(description = "Sets the title of the game window.")
-	public void settitle(/*? if v0 {*/ @Greedy /*?}*/ String title) {
+	@Handler(description = "Sets the title of the game window.")
+	public void settitle(/*? if v0 {*/ /*@Greedy *//*?}*/ String title) {
 		Display.setTitle(title);
-		UChat.chat(FINEMARK + " §eSet display title to \"§f" + title + "§e\"!");
+		Platform.compatibility().displayChatMessage(FINEMARK + " §eSet display title to \"§f" + title + "§e\"!");
 	}
 
-	@SubCommand(description = "Shows mod constants and build information such as the project version.")
+	@Handler(description = "Shows mod constants and build information such as the project version.")
 	public void constants() {
 		try {
-			UChat.chat(FINEMARK + " §eConstants:");
+			Platform.compatibility().displayChatMessage(FINEMARK + " §eConstants:");
 			for (Field field : FinementConstants.class.getDeclaredFields()) {
-				UChat.chat(FINEMARK + " " + field.getName() + ": §r" + field.get(null));
+				Platform.compatibility().displayChatMessage(FINEMARK + " " + field.getName() + ": §r" + field.get(null));
 			}
 		}
 		catch (IllegalAccessException e) {
-			UChat.chat(FINEMARK + " §cCouldn't get mod constants!");
+			Platform.compatibility().displayChatMessage(FINEMARK + " §cCouldn't get mod constants!");
 			LogManager.getLogger("Finement").error("Couldn't get mod constants!", e);
 		}
 	}

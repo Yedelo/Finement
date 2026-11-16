@@ -6,10 +6,10 @@ import at.yedel.finement.config.FinementConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 //? if forge {
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+/*import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
-//?} else {
-//import net.ornithemc.osl.networking.api.client.ClientConnectionEvents;
+*///?} else {
+import net.ornithemc.osl.networking.api.client.ClientConnectionEvents;
 //?}
 import org.lwjgl.opengl.Display;
 
@@ -26,14 +26,14 @@ public class ChangeWindowTitle {
 
     private ChangeWindowTitle() {
         //? if ornithe {
-        /*
+        
         ClientConnectionEvents.PLAY_READY.register((minecraft) -> onServerJoin());
         ClientConnectionEvents.DISCONNECT.register((minecraft) -> onServerDisconnect());
-        *///?}
+        //?}
     }
 
     //? if forge {
-    @SubscribeEvent
+    /*@SubscribeEvent
     public void onForgeJoin(FMLNetworkEvent.ClientConnectedToServerEvent event) {
         onServerJoin();
     }
@@ -42,7 +42,7 @@ public class ChangeWindowTitle {
     public void onForgeDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
         onServerDisconnect();
     }
-    //?}
+    *///?}
 
     public void onServerJoin() {
         Minecraft.getMinecraft().addScheduledTask(() -> {

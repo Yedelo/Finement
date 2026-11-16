@@ -4,22 +4,22 @@ package at.yedel.finement.config;
 
 import at.yedel.finement.mixins.AccessorFontRenderer;
 //? if v0 {
-import cc.polyfrost.oneconfig.config.Config;
+/*import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.*;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.core.OneKeyBind;
 import cc.polyfrost.oneconfig.config.data.InfoType;
 import cc.polyfrost.oneconfig.config.data.Mod;
 import cc.polyfrost.oneconfig.config.data.ModType;
-//?} else {
-/*import org.polyfrost.compose.render.PolyColor;
+*///?} else {
+import org.polyfrost.compose.render.PolyColor;
 import org.polyfrost.oneconfig.api.config.v1.Config;
 import org.polyfrost.oneconfig.api.config.v1.annotations.*;
 import org.polyfrost.oneconfig.api.ui.v1.keybind.KeybindHelper;
 import org.polyfrost.oneconfig.api.ui.v1.keybind.OneConfigKeybind;
 import org.polyfrost.oneconfig.internal.legacy.InputConstants;
 import org.polyfrost.oneconfig.utils.v1.dsl.ScreensKt;
-*///?}
+//?}
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
@@ -39,14 +39,14 @@ public class FinementConfig extends Config {
 
 	private FinementConfig() {
 		//? if v0 {
-		super(new Mod("Finement", ModType.UTIL_QOL, "/assets/finement/finement.png"), "finement.json", true, true);
+		/*super(new Mod("Finement", ModType.UTIL_QOL, "/assets/finement/finement.png"), "finement.json", true, true);
 		initialize();
 		registerKeyBind(zerothPersonPerspectiveKeybind, () -> {
 			// it is a bit misleading
 			Minecraft.getMinecraft().gameSettings.thirdPersonView = -1;
 		});
-		//?} else {
-		//super("finement", "assets/finement/finement.png", "Finement", Category.QOL);
+		*///?} else {
+		super("finement", "assets/finement/finement.png", "Finement", Category.QOL);
 		//?}
 
 		setupColorCodes();
@@ -63,21 +63,21 @@ public class FinementConfig extends Config {
 
 	public void open() {
 		//? if v0
-		openGui();
+		//openGui();
 		//? else
-		//ScreensKt.openUI(this);
+		ScreensKt.openUI(this);
 	}
 
 	//? if v1 {
-	/*@Switch(
-		name = "Enabled",
+	@Switch(
+		title = "Enabled",
 		description = "Global toggle for the mod."
 	)
 	public boolean enabled = true;
-	*///?}
+	//?}
 
 	@Switch(
-		name = "Client-Side Hurt Animation",
+		title = "Client-Side Hurt Animation",
 		description = "Plays the hurt animation client-side when attacking entities. Note that this occurs on all entities, use 'Only Enable on Real Players' to reduce it to just other players.",
 		category = "Gameplay",
 		subcategory = "Combat"
@@ -85,7 +85,7 @@ public class FinementConfig extends Config {
 	public boolean clientSideHurtAnimation = false;
 
 	@Switch(
-		name = "Only Enable on Real Players",
+		title = "Only Enable on Real Players",
 		description = "Only play the client-side hurt animation on real players.",
 		category = "Gameplay",
 		subcategory = "Combat"
@@ -93,7 +93,7 @@ public class FinementConfig extends Config {
 	public boolean onlyEnableOnRealPlayers = true;
 
 	@Switch(
-		name = "Client-Side Auto-Block",
+		title = "Client-Side Auto-Block",
 		description = "Always shows the blocking animation client-side.",
 		category = "Gameplay",
 		subcategory = "Combat"
@@ -101,28 +101,28 @@ public class FinementConfig extends Config {
 	public boolean clientSideAutoBlock = false;
 
 	@Switch(
-		name = "Rotate Sword in Third Person",
+		title = "Rotate Sword in Third Person",
 		description = "Applies sword rotations for third-person auto-blocking. Potentially fixes rotation issues with OverflowAnimations.",
 		category = "Gameplay",
 		subcategory = "Combat"
 	)
 	public boolean rotateSwordInThirdPerson = true;
 
-	@KeyBind(
-		name = "0th Person Perspective",
+	@Keybind(
+		title = "0th Person Perspective",
 		description = "Press to go into an inaccessible and freaky looking perspective mode.",
 		category = "Gameplay",
 		subcategory = "Perspective"
 	)
-	public OneKeyBind zerothPersonPerspectiveKeybind =
+	public OneConfigKeybind zerothPersonPerspectiveKeybind =
 	//? if v0 {
-		 new OneKeyBind(Keyboard.KEY_O);
+		 //new OneConfigKeybind(Keyboard.KEY_O);
 	//?} else {
-		//KeybindHelper.builder().key(InputConstants.KEY_O).action(() -> Minecraft.getMinecraft().gameSettings.thirdPersonView = -1).register();
+		KeybindHelper.builder().key(InputConstants.KEY_O).action(() -> Minecraft.getMinecraft().gameSettings.thirdPersonView = -1).register();
 	//?}
 
 	@Switch(
-		name = "Perspective Dependant FOVs",
+		title = "Perspective Dependant FOVs",
 		description = "Allows you to set specific FOVs for different perspectives.",
 		category = "Gameplay",
 		subcategory = "Perspective"
@@ -130,7 +130,7 @@ public class FinementConfig extends Config {
 	public boolean perspectiveDependantFOVs = false;
 
 	@Slider(
-		name = "First Person FOV",
+		title = "First Person FOV",
 		category = "Gameplay",
 		subcategory = "Perspective",
 		min = 30F,
@@ -139,7 +139,7 @@ public class FinementConfig extends Config {
 	public float firstPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
-		name = "Second Person FOV",
+		title = "Second Person FOV",
 		category = "Gameplay",
 		subcategory = "Perspective",
 		min = 30F,
@@ -148,7 +148,7 @@ public class FinementConfig extends Config {
 	public float secondPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
-		name = "Third Person FOV",
+		title = "Third Person FOV",
 		category = "Gameplay",
 		subcategory = "Perspective",
 		min = 30F,
@@ -157,7 +157,7 @@ public class FinementConfig extends Config {
 	public float thirdPersonFOV = Minecraft.getMinecraft().gameSettings.fovSetting;
 
 	@Slider(
-		name = "Zeroth Person FOV",
+		title = "Zeroth Person FOV",
 		category = "Gameplay",
 		subcategory = "Perspective",
 		min = 30F,
@@ -182,7 +182,7 @@ public class FinementConfig extends Config {
 	}
 
 	@Switch(
-		name = "Smooth Slot Hovering",
+		title = "Smooth Slot Hovering",
 		description = "Draws square highlights at your mouse instead of snapping to slots.",
 		category = "Interface",
 		subcategory = "Inventory"
@@ -190,7 +190,7 @@ public class FinementConfig extends Config {
 	public boolean smoothSlotHovering = false;
 
 	@Switch(
-		name = "Snap Item Rendering",
+		title = "Snap Item Rendering",
 		description = "Snaps your held item in inventories to the currently hovered slot.",
 		category = "Interface",
 		subcategory = "Inventory"
@@ -198,7 +198,7 @@ public class FinementConfig extends Config {
 	public boolean snapItemRendering = false;
 
 	@Switch(
-		name = "Don't Render Empty Tooltips",
+		title = "Don't Render Empty Tooltips",
 		description = "Don't render empty tooltips. Requires advanced tooltips (F3+H) to be off.",
 		category = "Interface",
 		subcategory = "Inventory"
@@ -206,7 +206,7 @@ public class FinementConfig extends Config {
 	public boolean dontRenderEmptyTooltips = true;
 
 	@Switch(
-		name = "Don't Obfuscate Text",
+		title = "Don't Obfuscate Text",
 		description = "Don't show text in the obfuscated style. Text will likely still be meaningless.",
 		category = "Interface",
 		subcategory = "Other"
@@ -214,7 +214,7 @@ public class FinementConfig extends Config {
 	public boolean dontObfuscateText = false;
 
 	@Switch(
-		name = "Silently Decline Server Resource Packs",
+		title = "Silently Decline Server Resource Packs",
 		description = "Silently decline server resource packs, but tell the server that you successfully downloaded them.",
 		category = "Interface",
 		subcategory = "Other"
@@ -222,7 +222,7 @@ public class FinementConfig extends Config {
 	public boolean silentlyDeclineServerResourcePacks = false;
 
 	@Switch(
-		name = "Chat Message Indicator",
+		title = "Chat Message Indicator",
 		description = "Sends a chat message when you silently decline a server resource pack.",
 		category = "Interface",
 		subcategory = "Other"
@@ -230,7 +230,7 @@ public class FinementConfig extends Config {
 	public boolean sdsrpChatMessage = true;
 
 	@Switch(
-		name = "Unformat Chat Logs",
+		title = "Unformat Chat Logs",
 		description = "Properly removes formatting from chat messages before logging them.",
 		category = "Interface",
 		subcategory = "Other"
@@ -238,7 +238,7 @@ public class FinementConfig extends Config {
 	public boolean unformatChatLogs = true;
 
 	@Switch(
-		name = "Hide Missing Signature Errors",
+		title = "Hide Missing Signature Errors",
 		description = "Hides \"Signature is missing from textures payload\" errors from being logged.",
 		category = "Interface",
 		subcategory = "Other"
@@ -246,7 +246,7 @@ public class FinementConfig extends Config {
 	public boolean hideMissingSignatureErrors = true;
 
 	@Switch(
-		name = "Book Background (1.14+)",
+		title = "Book Background (1.14+)",
 		description = "Draws the default dark background in book GUIs.",
 		category = "Modern Features",
 		subcategory = "General"
@@ -254,7 +254,7 @@ public class FinementConfig extends Config {
 	public boolean bookBackground = true;
 
 	@Switch(
-		name = "Keep Chat History on Chat Clear (1.15.2+)",
+		title = "Keep Chat History on Chat Clear (1.15.2+)",
 		description = "When clearing your chat (F3 + D), keep your message history (from pressing up arrow key).",
 		category = "Modern Features",
 		subcategory = "General"
@@ -262,7 +262,7 @@ public class FinementConfig extends Config {
 	public boolean keepChatHistoryOnChatClear = true;
 
 	@Switch(
-		name = "Change Window Title (1.15.2+)",
+		title = "Change Window Title (1.15.2+)",
 		description = "Changes the window title on world and server join. Can also be changed with /finement settitle [title].",
 		category = "Modern Features",
 		subcategory = "General"
@@ -270,7 +270,7 @@ public class FinementConfig extends Config {
 	public boolean changeWindowTitle = false;
 
 	@Switch(
-		name = "Damage Tilt (1.19.4+)",
+		title = "Damage Tilt (1.19.4+)",
 		description = "Allows you to customize how much your screen hurts when being damaged.",
 		category = "Modern Features",
 		subcategory = "General"
@@ -278,7 +278,7 @@ public class FinementConfig extends Config {
 	public boolean damageTilt = false;
 
 	@Slider(
-		name = "Damage Tilt Strength",
+		title = "Damage Tilt Strength",
 		description = "The amount of camera shake caused by being hurt.",
 		category = "Modern Features",
 		subcategory = "General",
@@ -289,7 +289,7 @@ public class FinementConfig extends Config {
 	public int damageTiltStrength = 1;
 
 	@Switch(
-		name = "Item Uses (1.15+)",
+		title = "Item Uses (1.15+)",
 		description = "Swings your hand when using certain items, such as snowballs, eggs and armor.",
 		category = "Modern Features",
 		subcategory = "Hand Swings"
@@ -297,7 +297,7 @@ public class FinementConfig extends Config {
 	public boolean itemUseSwings = false;
 
 	@Switch(
-		name = "Item Drops (1.15+)",
+		title = "Item Drops (1.15+)",
 		description = "Swings your hand when dropping an item.",
 		category = "Modern Features",
 		subcategory = "Hand Swings"
@@ -345,10 +345,10 @@ public class FinementConfig extends Config {
 			"shadowColor$e",
 			"shadowColor$f"
 		}) {
-			addListener(string, this::loadCustomColorCodes);
+			addCallback(string, this::loadCustomColorCodes);
 			addDependency(string, "colorCodeToggle");
 		}
-		addListener("colorCodeToggle", () -> {
+		addCallback("colorCodeToggle", () -> {
 			System.arraycopy(colorCodeToggle ? customColorCodes : originalColorCodes, 0, ((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, 32);
 		});
 
@@ -356,57 +356,57 @@ public class FinementConfig extends Config {
 
 	//~ if v1 ' = ' -> ' = 0x00FFFFFF & ' {
 	private void loadCustomColorCodes() {
-		customColorCodes[0] = mainColor$0.getRGB();
-		customColorCodes[1] = mainColor$1.getRGB();
-		customColorCodes[2] = mainColor$2.getRGB();
-		customColorCodes[3] = mainColor$3.getRGB();
-		customColorCodes[4] = mainColor$4.getRGB();
-		customColorCodes[5] = mainColor$5.getRGB();
-		customColorCodes[6] = mainColor$6.getRGB();
-		customColorCodes[7] = mainColor$7.getRGB();
-		customColorCodes[8] = mainColor$8.getRGB();
-		customColorCodes[9] = mainColor$9.getRGB();
-		customColorCodes[10] = mainColor$a.getRGB();
-		customColorCodes[11] = mainColor$b.getRGB();
-		customColorCodes[12] = mainColor$c.getRGB();
-		customColorCodes[13] = mainColor$d.getRGB();
-		customColorCodes[14] = mainColor$e.getRGB();
-		customColorCodes[15] = mainColor$f.getRGB();
-		customColorCodes[16] = shadowColor$0.getRGB();
-		customColorCodes[17] = shadowColor$1.getRGB();
-		customColorCodes[18] = shadowColor$2.getRGB();
-		customColorCodes[19] = shadowColor$3.getRGB();
-		customColorCodes[20] = shadowColor$4.getRGB();
-		customColorCodes[21] = shadowColor$5.getRGB();
-		customColorCodes[22] = shadowColor$6.getRGB();
-		customColorCodes[23] = shadowColor$7.getRGB();
-		customColorCodes[24] = shadowColor$8.getRGB();
-		customColorCodes[25] = shadowColor$9.getRGB();
-		customColorCodes[26] = shadowColor$a.getRGB();
-		customColorCodes[27] = shadowColor$b.getRGB();
-		customColorCodes[28] = shadowColor$c.getRGB();
-		customColorCodes[29] = shadowColor$d.getRGB();
-		customColorCodes[30] = shadowColor$e.getRGB();
-		customColorCodes[31] = shadowColor$f.getRGB();
+		customColorCodes[0] = 0x00FFFFFF & mainColor$0.getArgb();
+		customColorCodes[1] = 0x00FFFFFF & mainColor$1.getArgb();
+		customColorCodes[2] = 0x00FFFFFF & mainColor$2.getArgb();
+		customColorCodes[3] = 0x00FFFFFF & mainColor$3.getArgb();
+		customColorCodes[4] = 0x00FFFFFF & mainColor$4.getArgb();
+		customColorCodes[5] = 0x00FFFFFF & mainColor$5.getArgb();
+		customColorCodes[6] = 0x00FFFFFF & mainColor$6.getArgb();
+		customColorCodes[7] = 0x00FFFFFF & mainColor$7.getArgb();
+		customColorCodes[8] = 0x00FFFFFF & mainColor$8.getArgb();
+		customColorCodes[9] = 0x00FFFFFF & mainColor$9.getArgb();
+		customColorCodes[10] = 0x00FFFFFF & mainColor$a.getArgb();
+		customColorCodes[11] = 0x00FFFFFF & mainColor$b.getArgb();
+		customColorCodes[12] = 0x00FFFFFF & mainColor$c.getArgb();
+		customColorCodes[13] = 0x00FFFFFF & mainColor$d.getArgb();
+		customColorCodes[14] = 0x00FFFFFF & mainColor$e.getArgb();
+		customColorCodes[15] = 0x00FFFFFF & mainColor$f.getArgb();
+		customColorCodes[16] = 0x00FFFFFF & shadowColor$0.getArgb();
+		customColorCodes[17] = 0x00FFFFFF & shadowColor$1.getArgb();
+		customColorCodes[18] = 0x00FFFFFF & shadowColor$2.getArgb();
+		customColorCodes[19] = 0x00FFFFFF & shadowColor$3.getArgb();
+		customColorCodes[20] = 0x00FFFFFF & shadowColor$4.getArgb();
+		customColorCodes[21] = 0x00FFFFFF & shadowColor$5.getArgb();
+		customColorCodes[22] = 0x00FFFFFF & shadowColor$6.getArgb();
+		customColorCodes[23] = 0x00FFFFFF & shadowColor$7.getArgb();
+		customColorCodes[24] = 0x00FFFFFF & shadowColor$8.getArgb();
+		customColorCodes[25] = 0x00FFFFFF & shadowColor$9.getArgb();
+		customColorCodes[26] = 0x00FFFFFF & shadowColor$a.getArgb();
+		customColorCodes[27] = 0x00FFFFFF & shadowColor$b.getArgb();
+		customColorCodes[28] = 0x00FFFFFF & shadowColor$c.getArgb();
+		customColorCodes[29] = 0x00FFFFFF & shadowColor$d.getArgb();
+		customColorCodes[30] = 0x00FFFFFF & shadowColor$e.getArgb();
+		customColorCodes[31] = 0x00FFFFFF & shadowColor$f.getArgb();
 		
 		System.arraycopy(customColorCodes, 0, ((AccessorFontRenderer) Minecraft.getMinecraft().fontRendererObj).finement$getColorCodeArray(), 0, 32);
 	}
 	//~}
 
-	private static OneColor randomColor() {
-		return new OneColor(/*? if v1 {*/ /*0xFF000000 | *//*?}*/ (int) (Math.random() * 0xFFFFFF));
+	private static PolyColor randomColor() {
+		return new PolyColor(/*? if v1 {*/ 0xFF000000 | /*?}*/ (int) (Math.random() * 0xFFFFFF));
 	}
 
 	@Switch(
-		name = "Color Code Toggle",
+		title = "Color Code Toggle",
 		category = "Custom Color Codes",
 		subcategory = "General"
-		/*? if v0 {*/, size = 2 /*?}*/
+		/*? if v0 {*//*, size = 2 *//*?}*/
 	)
 	public boolean colorCodeToggle = false;
 
 	@Button(
-		name = "Randomize Color Codes",
+		title = "Randomize Color Codes",
 		text = "Randomize",
 		subcategory = "General",
 		category = "Custom Color Codes"
@@ -449,318 +449,318 @@ public class FinementConfig extends Config {
 
 	//~ if v1 'new OneColor(' -> 'new PolyColor(0xFF000000 | ' {
 	@Button(
-		name = "Reset Color Codes",
+		title = "Reset Color Codes",
 		text = "Reset",
 		category = "Custom Color Codes",
 		subcategory = "General"
 	)
 	private void resetColorCodes() {
-		mainColor$0 = new OneColor(0);
-		mainColor$1 = new OneColor(170);
-		mainColor$2 = new OneColor(43520);
-		mainColor$3 = new OneColor(43690);
-		mainColor$4 = new OneColor(11141120);
-		mainColor$5 = new OneColor(11141290);
-		mainColor$6 = new OneColor(16755200);
-		mainColor$7 = new OneColor(11184810);
-		mainColor$8 = new OneColor(5592405);
-		mainColor$9 = new OneColor(5592575);
-		mainColor$a = new OneColor(5635925);
-		mainColor$b = new OneColor(5636095);
-		mainColor$c = new OneColor(16733525);
-		mainColor$d = new OneColor(16733695);
-		mainColor$e = new OneColor(16777045);
-		mainColor$f = new OneColor(16777215);
-		shadowColor$0 = new OneColor(0);
-		shadowColor$1 = new OneColor(42);
-		shadowColor$2 = new OneColor(10752);
-		shadowColor$3 = new OneColor(10794);
-		shadowColor$4 = new OneColor(2752512);
-		shadowColor$5 = new OneColor(2752554);
-		shadowColor$6 = new OneColor(2763264);
-		shadowColor$7 = new OneColor(2763306);
-		shadowColor$8 = new OneColor(1381653);
-		shadowColor$9 = new OneColor(1381695);
-		shadowColor$a = new OneColor(1392405);
-		shadowColor$b = new OneColor(1392447);
-		shadowColor$c = new OneColor(4134165);
-		shadowColor$d = new OneColor(4134207);
-		shadowColor$e = new OneColor(4144917);
-		shadowColor$f = new OneColor(4144959);
+		mainColor$0 = new PolyColor(0xFF000000 | 0);
+		mainColor$1 = new PolyColor(0xFF000000 | 170);
+		mainColor$2 = new PolyColor(0xFF000000 | 43520);
+		mainColor$3 = new PolyColor(0xFF000000 | 43690);
+		mainColor$4 = new PolyColor(0xFF000000 | 11141120);
+		mainColor$5 = new PolyColor(0xFF000000 | 11141290);
+		mainColor$6 = new PolyColor(0xFF000000 | 16755200);
+		mainColor$7 = new PolyColor(0xFF000000 | 11184810);
+		mainColor$8 = new PolyColor(0xFF000000 | 5592405);
+		mainColor$9 = new PolyColor(0xFF000000 | 5592575);
+		mainColor$a = new PolyColor(0xFF000000 | 5635925);
+		mainColor$b = new PolyColor(0xFF000000 | 5636095);
+		mainColor$c = new PolyColor(0xFF000000 | 16733525);
+		mainColor$d = new PolyColor(0xFF000000 | 16733695);
+		mainColor$e = new PolyColor(0xFF000000 | 16777045);
+		mainColor$f = new PolyColor(0xFF000000 | 16777215);
+		shadowColor$0 = new PolyColor(0xFF000000 | 0);
+		shadowColor$1 = new PolyColor(0xFF000000 | 42);
+		shadowColor$2 = new PolyColor(0xFF000000 | 10752);
+		shadowColor$3 = new PolyColor(0xFF000000 | 10794);
+		shadowColor$4 = new PolyColor(0xFF000000 | 2752512);
+		shadowColor$5 = new PolyColor(0xFF000000 | 2752554);
+		shadowColor$6 = new PolyColor(0xFF000000 | 2763264);
+		shadowColor$7 = new PolyColor(0xFF000000 | 2763306);
+		shadowColor$8 = new PolyColor(0xFF000000 | 1381653);
+		shadowColor$9 = new PolyColor(0xFF000000 | 1381695);
+		shadowColor$a = new PolyColor(0xFF000000 | 1392405);
+		shadowColor$b = new PolyColor(0xFF000000 | 1392447);
+		shadowColor$c = new PolyColor(0xFF000000 | 4134165);
+		shadowColor$d = new PolyColor(0xFF000000 | 4134207);
+		shadowColor$e = new PolyColor(0xFF000000 | 4144917);
+		shadowColor$f = new PolyColor(0xFF000000 | 4144959);
 		if (colorCodeToggle) loadCustomColorCodes();
 	};
 
 	@Color(
-		name = "#0 Color (Main)",
-		allowAlpha = false,
+		title = "#0 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$0 = new OneColor(0);
+	private PolyColor mainColor$0 = new PolyColor(0xFF000000 | 0);
 
 	@Color(
-		name = "#0 Color (Shadow)",
-		allowAlpha = false,
+		title = "#0 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$0 = new OneColor(0);
+	private PolyColor shadowColor$0 = new PolyColor(0xFF000000 | 0);
 
 	@Color(
-		name = "#1 Color (Main)",
-		allowAlpha = false,
+		title = "#1 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$1 = new OneColor(170);
+	private PolyColor mainColor$1 = new PolyColor(0xFF000000 | 170);
 
 	@Color(
-		name = "#1 Color (Shadow)",
-		allowAlpha = false,
+		title = "#1 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$1 = new OneColor(42);
+	private PolyColor shadowColor$1 = new PolyColor(0xFF000000 | 42);
 
 	@Color(
-		name = "#2 Color (Main)",
-		allowAlpha = false,
+		title = "#2 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$2 = new OneColor(43520);
+	private PolyColor mainColor$2 = new PolyColor(0xFF000000 | 43520);
 
 	@Color(
-		name = "#2 Color (Shadow)",
-		allowAlpha = false,
+		title = "#2 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$2 = new OneColor(10752);
+	private PolyColor shadowColor$2 = new PolyColor(0xFF000000 | 10752);
 
 	@Color(
-		name = "#3 Color (Main)",
-		allowAlpha = false,
+		title = "#3 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$3 = new OneColor(43690);
+	private PolyColor mainColor$3 = new PolyColor(0xFF000000 | 43690);
 
 	@Color(
-		name = "#3 Color (Shadow)",
-		allowAlpha = false,
+		title = "#3 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$3 = new OneColor(10794);
+	private PolyColor shadowColor$3 = new PolyColor(0xFF000000 | 10794);
 
 	@Color(
-		name = "#4 Color (Main)",
-		allowAlpha = false,
+		title = "#4 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$4 = new OneColor(11141120);
+	private PolyColor mainColor$4 = new PolyColor(0xFF000000 | 11141120);
 
 	@Color(
-		name = "#4 Color (Shadow)",
-		allowAlpha = false,
+		title = "#4 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$4 = new OneColor(2752512);
+	private PolyColor shadowColor$4 = new PolyColor(0xFF000000 | 2752512);
 
 	@Color(
-		name = "#5 Color (Main)",
-		allowAlpha = false,
+		title = "#5 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$5 = new OneColor(11141290);
+	private PolyColor mainColor$5 = new PolyColor(0xFF000000 | 11141290);
 
 	@Color(
-		name = "#5 Color (Shadow)",
-		allowAlpha = false,
+		title = "#5 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$5 = new OneColor(2752554);
+	private PolyColor shadowColor$5 = new PolyColor(0xFF000000 | 2752554);
 
 	@Color(
-		name = "#6 Color (Main)",
-		allowAlpha = false,
+		title = "#6 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$6 = new OneColor(16755200);
+	private PolyColor mainColor$6 = new PolyColor(0xFF000000 | 16755200);
 
 	@Color(
-		name = "#6 Color (Shadow)",
-		allowAlpha = false,
+		title = "#6 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$6 = new OneColor(2763264);
+	private PolyColor shadowColor$6 = new PolyColor(0xFF000000 | 2763264);
 
 	@Color(
-		name = "#7 Color (Main)",
-		allowAlpha = false,
+		title = "#7 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$7 = new OneColor(11184810);
+	private PolyColor mainColor$7 = new PolyColor(0xFF000000 | 11184810);
 
 	@Color(
-		name = "#7 Color (Shadow)",
-		allowAlpha = false,
+		title = "#7 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$7 = new OneColor(2763306);
+	private PolyColor shadowColor$7 = new PolyColor(0xFF000000 | 2763306);
 
 	@Color(
-		name = "#8 Color (Main)",
-		allowAlpha = false,
+		title = "#8 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$8 = new OneColor(5592405);
+	private PolyColor mainColor$8 = new PolyColor(0xFF000000 | 5592405);
 
 	@Color(
-		name = "#8 Color (Shadow)",
-		allowAlpha = false,
+		title = "#8 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$8 = new OneColor(1381653);
+	private PolyColor shadowColor$8 = new PolyColor(0xFF000000 | 1381653);
 
 	@Color(
-		name = "#9 Color (Main)",
-		allowAlpha = false,
+		title = "#9 Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$9 = new OneColor(5592575);
+	private PolyColor mainColor$9 = new PolyColor(0xFF000000 | 5592575);
 
 	@Color(
-		name = "#9 Color (Shadow)",
-		allowAlpha = false,
+		title = "#9 Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$9 = new OneColor(1381695);
+	private PolyColor shadowColor$9 = new PolyColor(0xFF000000 | 1381695);
 
 	@Color(
-		name = "#a Color (Main)",
-		allowAlpha = false,
+		title = "#a Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$a = new OneColor(5635925);
+	private PolyColor mainColor$a = new PolyColor(0xFF000000 | 5635925);
 
 	@Color(
-		name = "#a Color (Shadow)",
-		allowAlpha = false,
+		title = "#a Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$a = new OneColor(1392405);
+	private PolyColor shadowColor$a = new PolyColor(0xFF000000 | 1392405);
 
 	@Color(
-		name = "#b Color (Main)",
-		allowAlpha = false,
+		title = "#b Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$b = new OneColor(5636095);
+	private PolyColor mainColor$b = new PolyColor(0xFF000000 | 5636095);
 
 	@Color(
-		name = "#b Color (Shadow)",
-		allowAlpha = false,
+		title = "#b Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$b = new OneColor(1392447);
+	private PolyColor shadowColor$b = new PolyColor(0xFF000000 | 1392447);
 
 	@Color(
-		name = "#c Color (Main)",
-		allowAlpha = false,
+		title = "#c Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$c = new OneColor(16733525);
+	private PolyColor mainColor$c = new PolyColor(0xFF000000 | 16733525);
 
 	@Color(
-		name = "#c Color (Shadow)",
-		allowAlpha = false,
+		title = "#c Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$c = new OneColor(4134165);
+	private PolyColor shadowColor$c = new PolyColor(0xFF000000 | 4134165);
 
 	@Color(
-		name = "#d Color (Main)",
-		allowAlpha = false,
+		title = "#d Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$d = new OneColor(16733695);
+	private PolyColor mainColor$d = new PolyColor(0xFF000000 | 16733695);
 
 	@Color(
-		name = "#d Color (Shadow)",
-		allowAlpha = false,
+		title = "#d Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$d = new OneColor(4134207);
+	private PolyColor shadowColor$d = new PolyColor(0xFF000000 | 4134207);
 
 	@Color(
-		name = "#e Color (Main)",
-		allowAlpha = false,
+		title = "#e Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$e = new OneColor(16777045);
+	private PolyColor mainColor$e = new PolyColor(0xFF000000 | 16777045);
 
 	@Color(
-		name = "#e Color (Shadow)",
-		allowAlpha = false,
+		title = "#e Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$e = new OneColor(4144917);
+	private PolyColor shadowColor$e = new PolyColor(0xFF000000 | 4144917);
 
 	@Color(
-		name = "#f Color (Main)",
-		allowAlpha = false,
+		title = "#f Color (Main)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor mainColor$f = new OneColor(16777215);
+	private PolyColor mainColor$f = new PolyColor(0xFF000000 | 16777215);
 
 	@Color(
-		name = "#f Color (Shadow)",
-		allowAlpha = false,
+		title = "#f Color (Shadow)",
+		alpha = false,
 		category = "Custom Color Codes",
 		subcategory = "Colors"
 	)
-	private OneColor shadowColor$f = new OneColor(4144959);
+	private PolyColor shadowColor$f = new PolyColor(0xFF000000 | 4144959);
 	//~}
 
 	@Info(
 		//? if v0 {
-		text = "Finement is not responsible for any bans that occur because of this feature.",
+		/*text = "Finement is not responsible for any bans that occur because of this feature.",
 		type = InfoType.WARNING,
-		//?} else {
-//		title = "Warning",
-//		description = "Finement is not responsible for any bans that occur because of this feature.",
+		*///?} else {
+		title = "Warning",
+		description = "Finement is not responsible for any bans that occur because of this feature.",
 		//?}
 		category = "Advanced"
 	)
 	public static int empty$0 = 0;
 
 	@Switch(
-		name = "Allow GUIs in Portals",
+		title = "Allow GUIs in Portals",
 		category = "Advanced",
 		description = "Allow opening normal GUIs such as the inventory when inside nether portals."
 	)

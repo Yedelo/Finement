@@ -5,12 +5,12 @@ package at.yedel.finement.features;
 import java.util.Random;
 
 import at.yedel.finement.config.FinementConfig;
-import cc.polyfrost.oneconfig.events.event.ReceivePacketEvent;
-import cc.polyfrost.oneconfig.libs.eventbus.Subscribe;
+import org.polyfrost.oneconfig.api.event.v1.events.PacketEvent;
+import org.polyfrost.oneconfig.api.event.v1.invoke.impl.Subscribe;
 //? if v0 {
- import cc.polyfrost.oneconfig.libs.universal.UChat;
+ //import cc.polyfrost.oneconfig.libs.universal.UChat;
 //?} else {
-//import cc.polyfrost.oneconfig.libs.universal.wrappers.message.UTextComponent;
+import org.polyfrost.oneconfig.api.platform.v1.Platform;
 //?}
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.play.client.C19PacketResourcePackStatus;
@@ -32,15 +32,15 @@ public class SilentlyDeclineServerResourcePacks {
 	private SilentlyDeclineServerResourcePacks() {}
 
 	@Subscribe
-	public void handleServerResourcePackPacket(ReceivePacketEvent event) {
+	public void handleServerResourcePackPacket(PacketEvent.Receive event) {
 		if (!FinementConfig.getInstance().enabled || !FinementConfig.getInstance().silentlyDeclineServerResourcePacks) return;
-		if (event.packet instanceof S48PacketResourcePackSend) {
-			String hash = ((S48PacketResourcePackSend) event.packet).getHash();
+		if (event.getPacket() instanceof S48PacketResourcePackSend) {
+			String hash = ((S48PacketResourcePackSend) event.getPacket()).getHash();
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C19PacketResourcePackStatus(hash, Action.ACCEPTED));
 			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new C19PacketResourcePackStatus(hash, Action.SUCCESSFULLY_LOADED));
-			event.isCancelled = true;
+			event.cancelled = true;
 			if (FinementConfig.getInstance().sdsrpChatMessage) {
-				UChat.chat(FINEMARK + " §7Silently declined server resource pack.");
+				Platform.compatibility().displayChatMessage(FINEMARK + " §7Silently declined server resource pack.");
 			}
 		}
 	}

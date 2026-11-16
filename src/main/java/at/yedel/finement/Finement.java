@@ -7,23 +7,23 @@ import at.yedel.finement.features.SilentlyDeclineServerResourcePacks;
 import at.yedel.finement.features.modern.ChangeWindowTitle;
 
 //? if forge {
-import at.yedel.finement.launch.FinementConstants;
+/*import at.yedel.finement.launch.FinementConstants;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.relauncher.Side;
-//?} else {
-//import net.fabricmc.api.ClientModInitializer;
+*///?} else {
+import net.fabricmc.api.ClientModInitializer;
 //?}
 //? if v0 {
-import cc.polyfrost.oneconfig.events.EventManager;
+/*import cc.polyfrost.oneconfig.events.EventManager;
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
-//?} else {
-/*
+*///?} else {
+
 import org.polyfrost.oneconfig.api.commands.v1.CommandManager;
 import org.polyfrost.oneconfig.api.event.v1.EventManager;
-*///?}
+//?}
 
 import java.util.Map;
 
@@ -31,30 +31,30 @@ import java.util.Map;
 
 
 //? if forge {
-@Mod(
+/*@Mod(
 	modid = FinementConstants.MOD_ID,
 	name = FinementConstants.MOD_NAME,
 	version = FinementConstants.MOD_VERSION,
 	clientSideOnly = true,
 	acceptedMinecraftVersions = "1.8.9"
 )
-//?}
-public class Finement /*? if ornithe {*/ /*implements ClientModInitializer *//*?}*/ {
+*///?}
+public class Finement /*? if ornithe {*/ implements ClientModInitializer /*?}*/ {
 	private void initialize() {
 		CommandManager.register(FinementCommand.getInstance());
 		EventManager.INSTANCE.register(SilentlyDeclineServerResourcePacks.getInstance());
 	}
 
 	//? if ornithe {
-	/*@Override
+	@Override
 	public void onInitializeClient() {
 		initialize();
 		ChangeWindowTitle.getInstance();
 	}
-	*///?}
+	//?}
 
 	//? if forge {
-	@Mod.EventHandler
+	/*@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		initialize();
 		MinecraftForge.EVENT_BUS.register(ChangeWindowTitle.getInstance());
@@ -71,5 +71,5 @@ public class Finement /*? if ornithe {*/ /*implements ClientModInitializer *//*?
 			EventManager.INSTANCE.register(eventListener);
 		}
 	}
-	//?}
+	*///?}
 }
